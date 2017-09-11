@@ -1,0 +1,1285 @@
+; List of translations no longer used in "template_reaper550rc21.ReaperLangPack.txt"
+
+
+[common]
+6A003F23022A1E47=複数のエンベロープポイントを移動するとき、両端にポイントを追加
+0CE78C3702CE687F=フリーアイテムポジションモード
+1D84015D83B05998=オートメーションモードを変更
+2E50A636B3040F96=トラックの時間基準を変更
+D2BA30B556C02C0A=時間選択: 時間選択とループポイントを解除
+95C34A1D8759ABE8=テキスト
+
+[DLG_102] ; IDD_MAIN
+
+[DLG_103] ; IDD_CFG_WAVEOUT
+
+[DLG_104] ; IDD_CFG_ASIO
+
+[DLG_114] ; IDD_REASCRIPT_EDITOR
+DCEF2B4D03DE723C=Name
+772CECA01AD73CB4=Value
+
+[DLG_118] ; IDD_PREFS_AUDIOCONFIG
+
+[DLG_120] ; IDD_MISCSRCINFO
+
+[DLG_121] ; IDD_ABOUT
+
+[DLG_122] ; IDD_CLICKITEMINFO
+
+[DLG_124] ; IDD_RENDERPROCDLG
+
+[DLG_125] ; IDD_SECTIONITEMINFO
+
+[DLG_126] ; IDD_PROJECTSETTINGS_SETTINGS
+
+[DLG_127] ; IDD_PROJECTSETTINGS
+
+[DLG_128] ; IDD_PREFERENCES
+
+[DLG_129] ; IDD_PROJECTSETTINGS_RECORDING
+
+[DLG_130] ; IDD_KEEPDELFILES
+
+[DLG_131] ; IDD_FX
+
+[DLG_132] ; IDD_FXADD
+
+[DLG_133] ; IDD_FXSCAN
+
+[DLG_134] ; IDD_PEAKSBUILD
+
+[DLG_135] ; IDD_UNKNOWNITEMINFO
+
+[DLG_136] ; IDD_PREFS_PLAY
+
+[DLG_137] ; IDD_PREFS_REC
+
+[DLG_138] ; IDD_PREFS_MEDIA
+4C9D984EF3ACFB06=メディアアイテムのボリューム調整幅:
+B56F3519D8CAEAE0=メディアアイテム編集設定
+
+[DLG_139] ; IDD_PREFS_GEN
+
+[DLG_140] ; IDD_ALIASLIST
+
+[DLG_141] ; IDD_ALIASITEM
+
+[DLG_142] ; IDD_MISSINGFILEPROMPT
+
+[DLG_143] ; IDD_JUMPTOTIME
+
+[DLG_145] ; IDD_COLORTHEMEDEV
+
+[DLG_146] ; IDD_FX_UNKN
+
+[DLG_147] ; IDD_FXTAB
+
+[DLG_148] ; IDD_KBHELP
+
+[DLG_151] ; IDD_MIXER
+
+[DLG_152] ; IDD_VSTHOST
+
+[DLG_153] ; IDD_PREFS_MIDI
+3D9CBC3C216900AD=Play
+
+[DLG_154] ; IDD_PREFS_PLUGINS
+
+[DLG_155] ; IDD_WAVESINK_CFG
+
+[DLG_156] ; IDD_PREFS_AUDIO
+E65D106B2B1EE745=〃 (MIDI デバイス)
+
+[DLG_157] ; IDD_PREFS_CSURF
+
+[DLG_158] ; IDD_SURFACEEDIT
+
+[DLG_159] ; IDD_DIRCLEANUP
+
+[DLG_160] ; IDD_PREFS_EDITORS
+
+[DLG_161] ; IDD_EDITORITEM
+
+[DLG_163] ; IDD_AUXSENDVIEW
+
+[DLG_164] ; IDD_FILECOPY
+
+[DLG_165] ; IDD_SETENVPTVAL
+
+[DLG_168] ; IDD_PROJECTSETTINGS_NOTES
+
+[DLG_169] ; IDD_MARKEREDIT
+
+[DLG_170] ; IDD_UNDOHIST
+
+[DLG_171] ; IDD_CONSOLDLG
+
+[DLG_172] ; IDD_PREFS_EDITCFG
+
+[DLG_173] ; IDD_LTCITEMINFO
+
+[DLG_174] ; IDD_DOCK
+
+[DLG_175] ; IDD_FXSAVE
+
+[DLG_176] ; IDD_REGIONEDIT
+
+[DLG_178] ; IDD_PREFS_DEFS_TRACK
+
+[DLG_179] ; IDD_FXRENAME
+
+[DLG_180] ; IDD_CPUMETER
+
+[DLG_181] ; IDD_NEWVER
+
+[DLG_182] ; IDD_ROUTING
+
+[DLG_183] ; IDD_FXCOMMENT
+
+[DLG_184] ; IDD_TSMARKEREDIT
+
+[DLG_185] ; IDD_SAVEOPTIONS
+
+[DLG_186] ; IDD_BROWSEMKDIR
+
+[DLG_187] ; IDD_MKDIR
+
+[DLG_188] ; IDD_TRANSPORT
+
+[DLG_189] ; IDD_FXFLOAT
+
+[DLG_190] ; IDD_FX_FLOAT
+
+[DLG_192] ; IDD_NEWJS
+
+[DLG_193] ; IDD_TRACKENVCTL
+
+[DLG_194] ; IDD_TRACKSENDCTL
+
+[DLG_196] ; IDD_TRACKVOLPANIOCHILD
+
+[DLG_197] ; IDD_NAVIGATOR
+
+[DLG_199] ; IDD_SNAPSETTINGS
+B628F936DB56849F=※ スムーズシークの設定は \"設定 > オーディオ > シーク\" で可能です。
+
+[DLG_200] ; IDD_PANLAWCTL
+
+[DLG_201] ; IDD_PANLAWCTL2
+
+[DLG_202] ; IDD_MASTERVUSETTINGS
+
+[DLG_203] ; IDD_PREFS_AUDIOBUF
+
+[DLG_204] ; IDD_ABOUT_LICENSE
+
+[DLG_206] ; IDD_AUXSENDCTL_CHILD3
+
+[DLG_209] ; IDD_PREFS_PLUGINS_DX
+
+[DLG_210] ; IDD_PREFS_PLUGINS_VST
+
+[DLG_212] ; IDD_PREFS_PROJECT
+
+[DLG_213] ; IDD_PREFS_APPEAR
+
+[DLG_214] ; IDD_PREFS_AUDIOCONFIG2
+
+[DLG_215] ; IDD_PREFS_EDIT_MOUSE
+
+[DLG_218] ; IDD_LOCKSETTINGS
+
+[DLG_219] ; IDD_PREFS_KBD
+
+[DLG_221] ; IDD_PREFS_KBDFIND
+
+[DLG_222] ; IDD_DOCKER
+
+[DLG_223] ; IDD_REMOVE_SILENCE
+
+[DLG_224] ; IDD_QUANTIZE_ITEMS
+
+[DLG_226] ; IDD_SETSRCOPTS
+
+[DLG_227] ; IDD_PREFS_REAMOTE
+
+[DLG_228] ; IDD_REAMOTESEARCH
+
+[DLG_229] ; IDD_REWIREHOST
+
+[DLG_230] ; IDD_REWIRE_MIDI_INPUTS
+
+[DLG_233] ; IDD_PREFS_REWIREDISABLEDCONFIG
+
+[DLG_234] ; IDD_PREFS_AUDIODISK
+
+[DLG_235] ; IDD_PREFS_REAMOTENEW
+
+[DLG_236] ; IDD_PREFS_MEDIAVU
+A450CC91205F2DE1=アイテムの音量調整方式:
+E99D6B09B5FB8102=アイテムの音量ノブ
+E148872CBAC20697=アイテムの上端
+272E5D69D552CDA7=非ミュート
+C54C5E311372A994=コメント
+
+[DLG_237] ; IDD_REAMOTE_PLUGINLIST
+
+[DLG_238] ; IDD_METRONOMECFG
+
+[DLG_239] ; IDD_VKEY
+
+[DLG_240] ; IDD_BIGCLOCK
+
+[DLG_241] ; IDD_MIDILEARN
+
+[DLG_242] ; IDD_BOUNCEDLG
+
+[DLG_243] ; IDD_SCREENSETS
+
+[DLG_247] ; IDD_SCREENSETS_SAVE
+
+[DLG_250] ; IDD_SCREENSETS_SAVE_VIEW
+
+[DLG_252] ; IDD_PREFS_GENADV
+
+[DLG_253] ; IDD_MIXER_MASTER
+
+[DLG_255] ; IDD_SCREENSETS_AUTOSAVE
+
+[DLG_256] ; IDD_MIDIMPORT
+90F55C9ED88C182A=MIDI マーカーからプロジェクトマーカーを作成
+
+[DLG_257] ; IDD_PREFS_MEDIA_MIDI
+CE62E51004AA256E=※ プールした MIDI アイテムのマウス編集設定は、\"編集動作 > マウスショートカット\" から行えます。
+
+[DLG_258] ; IDD_MIDIINQUANT
+
+[DLG_259] ; IDD_SINKCONFIG
+
+[DLG_261] ; IDD_CFG_DUMMY
+
+[DLG_262] ; IDD_TCCONFIG
+
+[DLG_263] ; IDD_MIDIOUT_CONFIG
+
+[DLG_264] ; IDD_PLUGIN_PIN
+
+[DLG_265] ; IDD_AUHOST
+
+[DLG_268] ; IDD_PROGRAMENV
+
+[DLG_269] ; IDD_BUTTONFINDER
+
+[DLG_270] ; IDD_GLUEDLG
+
+[DLG_273] ; IDD_OPENPROJECT
+
+[DLG_274] ; IDD_ACTIONS
+BAC64C1B2E060EE5=閉じる (&X)
+D43B88702E996ED9=絞込(&L):
+
+[DLG_275] ; IDD_ACTION_USERACCEL
+
+[DLG_276] ; IDD_ACTIONS_CUSTOM
+
+[DLG_277] ; IDD_RENAME
+
+[DLG_280] ; IDD_DYNAMIC_SPLIT
+
+[DLG_281] ; IDD_TRACKGROUP
+
+[DLG_282] ; IDD_TIMESIG
+
+[DLG_283] ; IDD_ROUTING_HDR
+
+[DLG_284] ; IDD_SAVEOPTIONS_TEMPLATE
+
+[DLG_285] ; IDD_MIDICONSOL
+
+[DLG_286] ; IDD_ITEMNOTES
+
+[DLG_288] ; IDD_THEMEBLENDMODE
+
+[DLG_290] ; IDD_REMOVE_ENV
+B1C729A0D83A33D1=エンベロープを削除
+69676BADB6602AC1=全てのエンベロープポイントは削除されます。エンベロープを完全に削除するか、もしくは、
+
+[DLG_291] ; IDD_ENV_PRUNE
+BE49475694A33074=選択時間内のポイントのみ
+
+[DLG_292] ; IDD_JOYSTICKDEF
+
+[DLG_376] ; IDD_PROJECTSETTINGS_VIDEO
+
+[DLG_421] ; IDD_FXPARMRENAME
+
+[DLG_422] ; IDD_CFG_WASAPI
+
+[DLG_423] ; IDD_UNKNOWN_PROJITEMS
+
+[DLG_424] ; IDD_MIDILEARN_DEFSELMODE
+
+[DLG_425] ; IDD_MIDIIN_CONFIG
+
+[DLG_426] ; IDD_WAITFORDEVICE
+
+[DLG_427] ; IDD_RENDERQ
+
+[DLG_428] ; IDD_RPPDROPDLG
+
+[DLG_435] ; IDD_VSTBRIDGECHILD
+
+[DLG_436] ; IDD_APIINPUT
+
+[DLG_437] ; IDD_APICONSOLE
+
+[DLG_438] ; IDD_CUSTOMIZE_MENU
+
+[DLG_440] ; IDD_INSERT_MULTIPLE_TRACKS
+
+[DLG_441] ; IDD_CUSTOMMENURENAME
+
+[DLG_443] ; IDD_CONSOLE
+
+[DLG_444] ; IDD_CONVERTER
+
+[DLG_446] ; IDD_ICONPICKER
+
+[DLG_447] ; IDD_PREFS_ENVELOPES
+
+[DLG_448] ; IDD_TOOLBAR_FLOATING
+
+[DLG_449] ; IDD_PREFS_MEDIA_VIDEO
+
+[DLG_452] ; IDD_EMPTYITEMINFO
+
+[DLG_455] ; IDD_PROMPTFORPREF
+
+[DLG_456] ; IDD_PROJBAY
+
+[DLG_457] ; IDD_PROJBAY_VIEW
+
+[DLG_458] ; IDD_PREFS_APPEAR_TCP
+
+[DLG_459] ; IDD_PREFS_APPEAR_PEAKS
+
+[DLG_464] ; IDD_REWIRESLAVE
+
+[DLG_465] ; IDD_TABTOTRANS
+
+[DLG_466] ; IDD_PREFS_EDIT_MOUSEMAP
+
+[DLG_467] ; IDD_NUDGE
+
+[DLG_469] ; IDD_TRACKMGR
+
+[DLG_470] ; IDD_MAC_OKCANCEL
+
+[DLG_471] ; IDD_GET_LICECAP
+
+[DLG_472] ; IDD_WAITINGFORSYNC
+
+[DLG_473] ; IDD_PREFS_AUDIOCONFIG_MAC
+
+[DLG_474] ; IDD_PREFS_PATH
+
+[DLG_475] ; IDD_MEDIAITEMPROPS
+
+[DLG_476] ; IDD_XFADE_ADJ
+
+[DLG_477] ; IDD_PREFS_DEFS_ITEM
+
+[DLG_478] ; IDD_PREFS_RENDER
+
+[DLG_486] ; IDD_CONFIG_EXPORT
+
+[DLG_487] ; IDD_CONFIG_IMPORT
+
+[DLG_488] ; IDD_SCREENSETS_CHILD
+
+[DLG_490] ; IDD_PREFS_MIDIEDITOR
+
+[DLG_504] ; IDD_SCALEFINDER
+
+[DLG_505] ; IDD_PREFS_PLUGINS_COMPAT
+
+[DLG_506] ; IDD_RENDERDLG1
+
+[DLG_507] ; IDD_AUTOMUTE
+
+[DLG_508] ; IDD_REGIONMGR
+
+[DLG_509] ; IDD_RENDERWARN
+
+[DLG_510] ; IDD_PITCHENVCFG
+
+[DLG_511] ; IDD_GENERIC_HELP
+
+[DLG_512] ; IDD_PROJECTSETTINGS_ADV
+
+[DLG_513] ; IDD_FREEZE
+
+[DLG_515] ; IDD_PREFS_PLUGINS_REASCRIPT
+
+[DLG_516] ; IDD_LANG
+
+[DLG_517] ; IDD_PREFS_SEEK
+E774FE4068484BEB=プリロール:
+1280F43535B6B625=アイテムの移動/トリム/フェード変更時に再生位置変更 - プリロール:
+
+[DLG_518] ; IDD_PREFS_REC_LOOP
+
+[DLG_519] ; IDD_PREFS_AUTOMATION
+2715653EC997D088=オートメーション設定
+
+[DLG_520] ; IDD_TEMPOADJ
+
+[DLG_521] ; IDD_TIMEBASE_HELP
+
+[DLG_522] ; IDD_FADE_EDITOR
+
+[DLG_523] ; IDD_GENERIC_MODALWAIT
+
+[DLG_524] ; IDD_PREFS_APPEAR_FADES
+
+[DLG_525] ; IDD_CHOOSEPROJVER
+
+[DLG_526] ; IDD_FADE_SAVE
+
+[DLG_536] ; IDD_INSERT_MULTI
+
+[DLG_552] ; IDD_REPLACE_ITEM
+
+[DLG_553] ; IDD_WARN_CONFIRM
+
+[DLG_554] ; IDD_MIDICONSOL_OK
+
+[DLG_555] ; IDD_REASCRIPT_OUTPUT
+
+[DLG_565] ; IDD_RENDER_QDELAY_SET
+
+[DLG_566] ; IDD_RENDER_QDELAY
+
+[DLG_567] ; IDD_SAVEALLPROJECTS
+
+[DLG_568] ; IDD_CHOOSE_PROJECT
+
+[DLG_569] ; IDD_DEFERRED_SCRIPT_PROMPT
+
+[DLG_570] ; IDD_SAVEOPTIONS_API_HEADER
+
+[DLG_571] ; IDD_FX_FOLDER_RENAME
+
+[DLG_575] ; IDD_WARPMARKER_EDIT
+
+[DLG_576] ; IDD_DEVICE_ERRORS
+
+[DLG_577] ; IDD_PREFS_GENADV_OSX
+
+[DLG_578] ; IDD_PREFS_AUDIOCONFIG_LINUX
+
+[MENU_102] ; IDR_MENU1
+F2E937B3FFB0B44D=メトロノーム/プリロール
+86891682F6F2D16C=全てを選択 (&C)
+
+[MENU_136] ; IDR_MENU2
+
+[MENU_144] ; IDR_FXMENU
+
+[MENU_175] ; IDR_FXADDMENU
+
+[MENU_300] ; IDR_CONTEXTS_0
+
+[MENU_301] ; IDR_CONTEXTS_1
+
+[MENU_302] ; IDR_CONTEXTS_2
+
+[MENU_303] ; IDR_CONTEXTS_3
+
+[MENU_304] ; IDR_CONTEXTS_4
+
+[MENU_305] ; IDR_CONTEXTS_5
+
+[MENU_306] ; IDR_CONTEXTS_6
+
+[MENU_307] ; IDR_CONTEXTS_7
+
+[MENU_308] ; IDR_CONTEXTS_8
+
+[MENU_309] ; IDR_CONTEXTS_9
+
+[MENU_310] ; IDR_CONTEXTS_10
+
+[MENU_311] ; IDR_CONTEXTS_11
+
+[MENU_312] ; IDR_CONTEXTS_12
+
+[MENU_313] ; IDR_CONTEXTS_13
+
+[MENU_314] ; IDR_CONTEXTS_14
+
+[MENU_315] ; IDR_CONTEXTS_15
+
+[MENU_316] ; IDR_CONTEXTS_16
+
+[MENU_317] ; IDR_CONTEXTS_17
+
+[MENU_318] ; IDR_CONTEXTS_18
+
+[MENU_319] ; IDR_CONTEXTS_19
+
+[MENU_320] ; IDR_CONTEXTS_20
+
+[MENU_321] ; IDR_CONTEXTS_21
+
+[MENU_322] ; IDR_CONTEXTS_22
+
+[MENU_323] ; IDR_CONTEXTS_23
+
+[MENU_324] ; IDR_CONTEXTS_24
+
+[MENU_325] ; IDR_CONTEXTS_25
+
+[MENU_326] ; IDR_CONTEXTS_26
+
+[MENU_327] ; IDR_CONTEXTS_27
+
+[MENU_328] ; IDR_CONTEXTS_28
+
+[MENU_329] ; IDR_CONTEXTS_29
+
+[MENU_330] ; IDR_CONTEXTS_30
+
+[MENU_331] ; IDR_CONTEXTS_31
+
+[MENU_332] ; IDR_CONTEXTS_32
+
+[MENU_333] ; IDR_CONTEXTS_33
+
+[MENU_334] ; IDR_CONTEXTS_34
+
+[MENU_335] ; IDR_CONTEXTS_35
+
+[MENU_336] ; IDR_CONTEXTS_36
+
+[MENU_337] ; IDR_CONTEXTS_37
+
+[MENU_338] ; IDR_CONTEXTS_38
+
+[MENU_339] ; IDR_CONTEXTS_39
+
+[MENU_340] ; IDR_TOOLBAR_CONTEXT
+
+[MENU_341] ; IDR_CONTEXTS_41
+
+[MENU_342] ; IDR_CONTEXTS_42
+
+[MENU_343] ; IDR_CONTEXTS_43
+
+[MENU_344] ; IDR_CONTEXTS_44
+
+[MENU_345] ; IDR_CONTEXTS_45
+
+[MENU_346] ; IDR_CONTEXTS_46
+
+[MENU_347] ; IDR_CONTEXTS_47
+
+[MENU_348] ; IDR_CONTEXTS_48
+
+[MENU_349] ; IDR_TOOLBARCTX
+
+[MENU_350] ; IDR_CONTEXTS_50
+
+[MENU_351] ; IDR_CONTEXTS_51
+
+[MENU_352] ; IDR_CONTEXTS_52
+
+[MENU_353] ; IDR_CONTEXTS_53
+
+[MENU_354] ; IDR_CONTEXTS_54
+
+[MENU_355] ; IDR_CONTEXTS_55
+
+[MENU_427] ; IDR_RECSETTINGS
+
+[MENU_428] ; IDR_TOOLBARS
+
+[MENU_497] ; IDR_PROJBAY
+
+[about]
+756B500741E261D4=ライセンスキーをインポート...
+
+[accel_sec]
+
+[access]
+
+[actiondialog]
+
+[actionlist]
+
+[actions]
+
+[actions_fmt]
+
+[actions_sub]
+
+[aliasdlg]
+
+[au]
+
+[audiodev]
+
+[automute]
+
+[bigclock]
+
+[bounce]
+
+[caption]
+
+[cd]
+
+[cd_DLG_102] ; IDD_BURN
+
+[cd_DLG_103] ; IDD_DOBURN
+
+[cd_DLG_155] ; IDD_ISOSINK_CFG
+
+[cdburn]
+
+[comp]
+
+[configexport]
+
+[convert]
+
+[cpumeter]
+9747AB7E1489B5C8=レイテンシ補償
+
+[customaction]
+
+[customizemenu]
+
+[ddp]
+
+[ddp_help]
+
+[dirclean]
+
+[docker]
+
+[dsplit]
+B82A34C1131245BF=選択アイテムにストレッチマーカーを上書き
+D534B836E2E23DF0=選択アイテムにストレッチマーカーを上書き (グループも同時刻処理)
+
+[dx]
+
+[env]
+
+[envdlg]
+
+[envdlg_heading]
+
+[envmenu]
+
+[envname]
+
+[epin]
+
+[explorer]
+
+[explorer_DLG_101] ; IDD_MAIN
+
+[explorer_DLG_102] ; IDD_SEXPLORER
+
+[explorer_DLG_103] ; IDD_SEXPLORER_LIST
+
+[explorer_DLG_134] ; IDD_DBBUILD
+
+[explorer_MENU_103] ; IDR_CONTEXTMENU
+
+[explorer_MENU_104] ; IDR_MENU1
+
+[explorer_actions]
+
+[explorer_col]
+
+[explorer_mbox]
+
+[explorer_menu]
+
+[exttc]
+
+[fadeedit]
+
+[faultyproject]
+
+[filecopy]
+
+[flac]
+
+[flac_DLG_120] ; IDD_FLACITEMINFO
+
+[flac_DLG_155] ; IDD_FLACSINK_CFG
+
+[freeze]
+
+[freezedesc]
+
+[fx]
+
+[fxadd]
+
+[fxmenu]
+
+[glue]
+
+[gridsnap]
+
+[group]
+
+[grouping]
+
+[help]
+
+[import]
+5D45242EECEF3CD3=%d 個の MIDI マーカーからプロジェクトマーカーを作成
+
+[item]
+
+[itemchan]
+
+[itemfn]
+
+[itemimport]
+
+[itemprop]
+
+[joystick]
+
+[jsfx]
+
+[knob]
+
+[marker]
+
+[mbox]
+
+[menu]
+
+[menus]
+
+[meter]
+
+[metronome]
+DB927D2B0D27A97F=強
+D4C05341A170A81B=弱
+
+[midi]
+6F57B2FA3E25199B=MIDI システムエクスクルーシブファイル
+B2B7B4BCDA9C366A=テキストを編集
+4580DDEB2552B0D7=(ノート選択が不十分です)
+D0C04B9E79D271AE=Track
+F3238895531F739E=チャンネル
+A2BF58A6DFD853DC=Project
+
+[midi_DLG_102] ; IDD_EDIT
+
+[midi_DLG_109] ; IDD_RENAME_ITEM
+
+[midi_DLG_118] ; IDD_RAWMIDI
+
+[midi_DLG_120] ; IDD_MIDIITEMINFO
+
+[midi_DLG_121] ; IDD_QUANTIZE
+
+[midi_DLG_122] ; IDD_SYXINFO
+
+[midi_DLG_123] ; IDD_NOTEPROP
+
+[midi_DLG_124] ; IDD_EVTPROP
+
+[midi_DLG_125] ; IDD_BANKPROGSELECT
+
+[midi_DLG_126] ; IDD_HUMANIZE
+
+[midi_DLG_127] ; IDD_TEXTEDIT
+
+[midi_DLG_128] ; IDD_FILTER_EVTS
+
+[midi_DLG_129] ; IDD_SYSEXEDIT
+
+[midi_DLG_133] ; IDD_LOADGROOVE
+
+[midi_DLG_134] ; IDD_GROOVEEDIT
+
+[midi_DLG_135] ; IDD_TRANSPOSE
+
+[midi_DLG_137] ; IDD_TUPLET
+
+[midi_DLG_138] ; IDD_LYRIC
+
+[midi_DLG_141] ; IDD_DISPQUANT
+
+[midi_DLG_226] ; IDD_MUSICXML_EXPORT
+
+[midi_MENU_103] ; IDR_CONTEXTMENU
+
+[midi_MENU_104] ; IDR_MENU
+57F28E456CC0FEEB=音高 (&P)
+
+[midi_MENU_105] ; IDR_MENU_ALLINONE
+
+[midi_MENU_106] ; IDR_CONTEXTMENU2
+
+[midi_MENU_108] ; IDR_CONTEXTMENU_INLINE
+
+[midi_MENU_112] ; IDR_PIANO_TOOLBAR
+
+[midi_MENU_113] ; IDR_EVTLIST_TOOLBAR
+
+[midi_MENU_114] ; IDR_VIEWMODE_CTX
+
+[midi_MENU_119] ; IDR_VELLANE_CTX
+
+[midi_MENU_138] ; IDR_SNAP_CTX
+
+[midi_MENU_139] ; IDR_FILTER_CTX
+
+[midi_MENU_140] ; IDR_SCORENOTE_CTX
+760E097E021FCAB7=タイ
+80F4359321406A3E=タイを最小限にする
+DE0735D2F4BCDDFD=アクセント
+9311DE55FD827361=スタッカート
+D673E8E4323D3368=テヌート
+60593781A31031C4=スタッカーティッシモ
+3083A0F1CE48C3D8=マルカート
+EC9F1DFA3A303821=フェルマータ
+EFC6B492F894EE1F=装飾
+1961AA1E1611F3A7=装飾音
+8C6D049E53661408=トリル
+E9DEA68FE20454D6=上短トリル (プラルトリラー)
+066B328E2B72704F=下短トリル (モルデント)
+AB64DC524741D0A4=<符頭をカスタマイズ>
+CEE8EBE207A9F72B=コード表示
+
+[midi_MENU_141] ; IDR_SCORETUPLET_CTX
+44E5E5BF09AFC9D9=連符のノートの長さを変更
+1E3DF082B918BF42=1/2
+351E626D0F02DA52=2 倍
+67206DAC7EB4E383=音部記号
+
+[midi_MENU_142] ; IDR_SCORESTAFF_CTX
+CD2643CF40F2B98D=クレッシェンド
+9669ABBC4100FA9D=ディミヌエンド
+44780E480E54E42F=pppp
+ACBAD67EB1C2FDE5=ppp
+D8A9C2186B844677=pp
+08325807B4EB1E5D=p
+D8B3B4186B8C8332=mp
+D8B3BE186B8C9430=mf
+08326207B4EB2F5B=f
+D8CBD0186BA144A7=ff
+03975A7EE307D3F3=fff
+22025A9BC64C862F=ffff
+
+[midi_actions]
+
+[midi_color] ; 省スペース
+073F0BD84FB2C598=ベロシティ
+F3238895531F739E=チャンネル
+57F28E456CC0FEEB=音高
+D0C04B9E79D271AE=トラック
+0B3E0029A01A16F4=メディアアイテム
+0EE3E56F69BB58C3=声部
+
+[midi_cols]
+
+[midi_et]
+
+[midi_filt]
+
+[midi_menu]
+
+[midi_tracklist]
+
+[midi_undo]
+
+[midi_voice]
+
+[midiedit]
+
+[midilearn]
+
+[misc]
+
+[missfile]
+
+[mixer]
+
+[mousemap]
+
+[mousemaps]
+0B3E0029A01A16F4=アイテム
+
+[mp3]
+53094A1A3B8030F3=MPEG オーディオファイル
+
+[mp3dec_DLG_120] ; IDD_MP3ITEMINFO
+
+[mp3dec_DLG_155] ; IDD_MP3SINK_CFG
+
+[mp3dec_DLG_426] ; IDD_GET_LAME
+91E1192119DFC1A4=LAME バージョン情報
+3C79CA3897B16414=ロード元:
+32336A13B2575099=特許や規約の都合上、REAPER は MP3 オーディオのエンコード機能を有していません。
+286AE6971E361124=LAME は、LAME Project によって開発されている無料のエンコーダで、現在利用可能なものの中では最良のエンコーダの 1 つと言えるものです。
+CC61D3795A433694=エンコードをサポートするには、
+D8ADAA186B880686=または
+F6627A76976E512F=といったファイル名のライブラリが必要になります。
+075FEAF258C42E4B=お住いの国にソフトウェア特許が存在しないか、または既に MP3 エンコードの特許規約が適用されているか、
+6CC6AF40C0E32E60=そうでない場合はあなたがそれらの特許の影響を受けない自信があるなら、
+117BC5AC0987E6AB=お使いの OS や構成に合うバージョンの LAME を下記のリンクからダウンロードして
+259E1EFDABA31D9F=以下のパスに解凍してください。 (クリックで
+88DEBC00E30AA250=エクスプローラに表示
+126DCAE97CED7D73=ファインダーに表示
+7E504F5B4E379DE2=ブラウザに表示
+4245CDD3F1B71EF8=LAME をダウンロード
+4E3F2A28BC1BBAA6=有効な LAME ライブラリ (ファイル名
+6E606861AA046147=) が見つかりませんでした。以下のパスについて検索を行いました:
+E5401A0DCD65ECD2=<システムの検索パス>
+E62743BBDA0EF8B4=LAME ロード不能
+D5FDE97B9DD34BC5=MP3 エンコーダ設定
+5FA955CCCC8F30C1=lame_enc.dll をダウンロード
+2D30FE10F915E913=インフォメーション
+1CE025C561D12628=LAME ライブラリの再読み込み
+
+[navigator]
+
+[notes]
+
+[nudge]
+2ADD7A879D22FA5C=始点
+
+[ogg_DLG_120] ; IDD_OGGITEMINFO
+
+[ogg_DLG_155] ; IDD_OGGSINK_CFG
+
+[opus]
+
+[pan]
+
+[pandlg]
+
+[panlaw]
+
+[parmmod]
+
+[peaksbuild]
+
+[pinmgr]
+
+[pitchenvcfg]
+
+[pitchshift]
+
+[prefs]
+
+[prefs_appear_help]
+
+[prefs_audio]
+
+[prefs_audio_help]
+
+[prefs_audiodev]
+
+[prefs_audiodev_asio_help]
+
+[prefs_audiodev_help]
+
+[prefs_auto_help]
+
+[prefs_buf]
+
+[prefs_buf_help]
+
+[prefs_dx_help]
+
+[prefs_edit]
+
+[prefs_edit_help]
+
+[prefs_env]
+
+[prefs_env_help]
+
+[prefs_env_pitch]
+
+[prefs_extedit]
+
+[prefs_fader]
+
+[prefs_gen_help]
+
+[prefs_itemdefs_help]
+
+[prefs_kbd_help]
+
+[prefs_list]
+D13552E0001BF958=コントロールサーフェス
+
+[prefs_media]
+
+[prefs_media_help]
+
+[prefs_mediafades_help]
+
+[prefs_mediapeaks_help]
+
+[prefs_mediavu_help]
+
+[prefs_meter_help]
+
+[prefs_midi_help]
+
+[prefs_mididev]
+
+[prefs_mididev_help]
+
+[prefs_midiedit_help]
+
+[prefs_mouse]
+B98F0E4771C45754=ノートを伸縮 (アルペジオ化)\0伸縮のみ
+
+[prefs_mouse_help]
+
+[prefs_path_help]
+
+[prefs_playback_help]
+
+[prefs_plugin]
+
+[prefs_plugin_help]
+
+[prefs_plugin_knob]
+
+[prefs_plugin_vst]
+
+[prefs_plugincompat_help]
+
+[prefs_project_help]
+
+[prefs_reamote]
+
+[prefs_reascript]
+
+[prefs_reascript_help]
+
+[prefs_record_help]
+
+[prefs_record_loop_help]
+
+[prefs_render_help]
+
+[prefs_seek_help]
+
+[prefs_track]
+
+[prefs_trackdefs_help]
+
+[prefs_video]
+
+[prefs_video_help]
+
+[prefs_vst_help]
+
+[projbay]
+
+[projload]
+
+[projsave]
+
+[projsettings]
+C54C5E311372A994=メモ
+
+[ps_dle]
+
+[ps_e]
+
+[radar]
+
+[reamote]
+
+[reaper_ddp_DLG_155] ; IDD_RAWSINK_CFG
+
+[reaper_ddp_DLG_156] ; IDD_HELPDIALOG
+
+[reaper_opus_DLG_120] ; IDD_OPUSITEMINFO
+
+[reaper_opus_DLG_155] ; IDD_OPUSSINK_CFG
+
+[reaper_rex_DLG_120] ; IDD_REXITEMINFO
+
+[reaper_rex_DLG_121] ; IDD_REXLOAD
+
+[rearoute_in]
+
+[rearoute_out]
+
+[reascript]
+
+[reccfg]
+
+[recmenu]
+B3D2C76823B56BAB=Ch %d
+
+[recordmode]
+
+[reg]
+
+[region]
+
+[regmgr]
+
+[regmgr_help]
+
+[render]
+D0466262522CFDFF=ファイル名が必要です。
+
+[render_month]
+
+[render_wildcard]
+
+[renderq]
+
+[resample]
+
+[rescript]
+
+[rewire]
+
+[rex]
+
+[routdlg] ; Masterのとこはスペースの都合
+
+[routdlg_heading]
+
+[routehelp]
+
+[routing]
+F3238895531F739E=Ch
+
+[rppsrc]
+
+[ruler]
+
+[save]
+
+[saveas]
+
+[scale]
+
+[screenset]
+
+[sendmenu]
+
+[sendwnd]
+
+[silence]
+
+[splash]
+
+[status]
+
+[subproject]
+
+[tag_genre]
+
+[tag_note]
+
+[theme]
+
+[title]
+
+[toolbar]
+
+[tooltip]
+
+[track]
+
+[trackmgr]
+
+[trackmgr_help]
+
+[trackrecstatus]
+
+[transport]
+10D0E37E59744608=テンポ
+
+[undo]
+
+[undohist]
+905761463B051828=初期ステータス
+
+[verchk]
+
+[video]
+
+[video2_DLG_102] ; IDD_MAIN
+
+[video2_DLG_104] ; IDD_ITEMINFO
+
+[video2_DLG_155] ; IDD_FFMPEG_SINK_CFG
+
+[video2_DLG_156] ; IDD_GIF_SINK_CFG
+
+[video2_DLG_157] ; IDD_ITEMINFO2
+
+[video2_DLG_158] ; IDD_GENERIC_HELP
+
+[video2_DLG_159] ; IDD_ITEMINFO2_CHILD
+
+[video2_DLG_160] ; IDD_LCF_SINK_CFG
+
+[video2_MENU_103] ; IDR_MENU1
+
+[video2_MENU_104] ; IDR_MENU3
+
+[video2_MENU_105] ; IDR_MENU2
+
+[video_menu]
+
+[video_processing]
+28450354F52CB7AE=Reset
+93244D3BB94E6F33=No preset
+
+[video_processing_help]
+
+[video_processing_preset]
+
+[vkb]
+
+[vol]
+
+[vorbis]
+
+[vst]
+
+[warn]
+
+[wavcfg]
+
+[wave]
+
+[wave_DLG_120] ; IDD_WAVEITEMINFO
+
+[wave_notes]
+
+[wavpack]
+
+[wavpack_DLG_101] ; IDD_WPSINK_CFG
+A0FAAFAEABDDC8E9=超高速 (非推奨)
+62D61C82DFC06ED3=高品質
+
+[wavpack_DLG_120] ; IDD_WPITEMINFO
