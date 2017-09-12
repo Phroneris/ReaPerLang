@@ -2,7 +2,7 @@
 ReaPerLang v1.04
 ====
 
-![Demo](https://github.com/Phroneris/tesuto/blob/master/tool/demo.gif)
+![Demo](https://github.com/Phroneris/ReaperJPN-Phroneris/tree/master/tool/demo.gif)
 
 
 ### 概要

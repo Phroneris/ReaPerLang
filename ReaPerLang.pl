@@ -244,6 +244,7 @@ sub writetxt
 &writetxt('lng_new');
 &writetxt('lng_missing');
 # &writetxt('section');
+# &writetxt('tmpl_crr');
 
 printf " (Time: %.3f sec)\n", Time::HiRes::time - $start_time;
 print "\n", ' Press enter to exit.', "\n";
