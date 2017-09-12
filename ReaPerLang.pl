@@ -1,6 +1,6 @@
 #!/usr/local/bin/perl
 #ReaPerLang ver1.04
-my $version = 1.04;
+my $version = 1.040;
 
 use strict;
 use warnings;

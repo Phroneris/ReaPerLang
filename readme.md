@@ -1,8 +1,8 @@
 
-ReaPerLang v1.04
+ReaPerLang v1.040
 ====
 
-![Demo](https://github.com/Phroneris/ReaperJPN-Phroneris/tree/master/tool/demo.gif)
+![Demo](https://github.com/Phroneris/ReaperJPN-Phroneris/blob/master/tool/demo.gif)
 
 
 ### 概要
