@@ -1,5 +1,5 @@
 
-ReaPerLang v1.040
+ReaPerLang v1.041
 ====
 
 ![Demo](https://github.com/Phroneris/ReaperJPN-Phroneris/blob/master/tool/demo.gif)
@@ -8,10 +8,11 @@ ReaPerLang v1.040
 ### 概要
 
 + 度重なる翻訳作業や公式 merge tool の適用などにより中身がゴチャついた哀れな LangPack を、  
-  最新 template ファイルに適応したほぼ行対行（※）の一致状態へ「編集用最適化」するツール。  
-  （※例外: `5CA1E00000000000=` によるサイズ調整行）  
-  行対行の状態になることで、訳すべき行の選択や template との比較が簡単になる。
+  最新 template ファイルに適応した**ほぼ**行対行の一致状態へ「編集用最適化」するツール。
++ 行対行の状態になることで、訳すべき行の選択や template との比較が簡単になる。
 + 最適化の際、template 側で既に失われている翻訳行は "missing" ファイルへと隔離される。
++ `5CA1E00000000000=` のサイズ調整行を template 側に追加した、  
+  **完全な**行対行の "tmpl_crr" ファイルも出力される。比較翻訳作業に活用しよう。
 
 
 ### 必要なもの
@@ -29,18 +30,22 @@ ReaPerLang v1.040
 
 + 最適化された LangPack ファイル
 + "missing" ファイル
++ "tmpl_crr" ファイル
 
 
 ### モード
 
 + 「初めましてモード（First-time mode）」と「お帰りなさいモード（Repeater mode）」がある。
-+ 「初めましてモード」は、このツールを初めて使う人用。単純に上記のような最適化を行う。  
-  ただし、元々 `;^` で始まっていたオプション翻訳行は全て失われる。  
-  必要なのは LangPack ファイルと、それの適応先にしたい最新の template ファイル。
-+ 「お帰りなさいモード」は、過去にこのツールで適応させた LangPack について、  
-  更に最新の状態へのアップデートを行いたい人用。  
-  適応後もオプション翻訳行が保持される。  
-  使用に際して、LangPack ファイルと最新の template ファイルだけでなく、  
+
+#### 「初めましてモード」
++ このツールを初めて使う人用。単純に上記のような最適化を行う。
++ ただし、元々 `;^` で始まっていたオプション翻訳行は全て失われる。
++ 必要なのは LangPack ファイルと、それの適応先にしたい最新の template ファイル。
+
+#### 「お帰りなさいモード」
++ 過去にこのツールで適応させた LangPack を、更に最新の状態へアップデートしたい人用。
++ 適応後もオプション翻訳行が保持される。  
++ 使用に際して、LangPack ファイルと最新の template ファイルだけでなく、  
   かつてこのツールの使用時に最新版として利用した古い template ファイル  
   （LangPack ファイルと行対行（サイズ調整行以外）のもの）も必要になる。
 
@@ -69,11 +74,12 @@ ReaPerLang v1.040
 ### Overview
 
 + LangPacks tend to be a mess by repeated translation work and the official merge tool.  
-  This tool adapts such a LangPack file to the newest REAPER template smartly.  
-  You will get a new "work-optimized" Langpack which is almost line-to-line(※)  
+  This tool adapts such a LangPack file to the newest REAPER template smartly.
++ You will get a new "work-optimized" Langpack which is **almost** line-to-line  
   to compare with the template and select lines to translate easily.  
-  (※ except `5CA1E00000000000=` lines)
 + In optimization, lost translations in the template will move to a "missing" file.
++ A "tmpl_crr" file will be also output as a **completely** line-to-line one  
+  with `5CA1E00000000000=` scaling lines. Make use of it for your comparative translation.
 
 
 ### Requirement
@@ -91,19 +97,24 @@ The following must be `*.txt`, UTF-8 and placed in the same path as RPL.
 
 + Optimized LangPack file
 + A "missing" file
++ A "tmpl_crr" file
 
 
 ### Modes
 
 + "First-time mode" and "repeater mode" are available.
-+ "First-time mode" is for those who use this tool for the first time.  
-  In this mode, this tool simply executes the conversion as above.  
-  Note that all optional translations which originally begins with `;^` will be discarded.  
-  You need a LangPack file and the newest template file to adapt to.
-+ "Repeater mode" is for those who want to update a LangPack file  
-  which had been adapted by this tool ever and have been translated further.  
-  Optional translations are preserved even after processing.  
-  To use this mode, you need not only an old LangPack and the newest template,  
+
+#### "First-time mode"
++ For those who use this tool for the first time.  
+  This tool simply executes the conversion as above.
++ Note that all optional translations which originally begins with `;^` will be discarded.
++ You need a LangPack file and the newest template file to adapt to.
+
+#### "Repeater mode"
++ For those who want to update a LangPack file  
+  which had been adapted by this tool ever and have been translated further.
++ Optional translations are preserved even after processing.
++ To use this mode, you need not only an old LangPack and the newest template,  
   but also an old line-to-line(※) template file used in previous conversion.  
   (※ except `5CA1E00000000000=` lines)
 

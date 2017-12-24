@@ -1,6 +1,5 @@
 #!/usr/local/bin/perl
-#ReaPerLang ver1.04
-my $version = 1.040;
+my $ReaPerLang = 'ReaPerLang ver 1.041';
 
 use strict;
 use warnings;
@@ -37,7 +36,7 @@ my @rnames = ();
 sub readtxt
 {
 	my ($rname, $f);
-	my @default = ('JPN_Phroneris', 522, '550rc21');
+	my @default = ('JPN_Phroneris', 522, 570);
 	my $i = $_[0];
 	chomp($rname = <STDIN>);
 	$rname = $rname eq '' ? $default[$i] : $rname;
@@ -59,7 +58,7 @@ sub readtxt
 	return @txt;
 }
 
-printf "ReaPerLang ver %.2f\n", $version;
+print $ReaPerLang, "\n";
 print <<'EOP';
 
 Mode select (0/1)
@@ -87,8 +86,9 @@ print ' Files in & out (make sure that all are UTF-8 ".txt" files)', "\n";
 print ' ┃in : Your old LangPack file', "\n";
 print ' ┃in : Old REAPER template file the above LangPack has been adapted to', "\n" if $mode == 1;
 print ' ┃in : Current (the newest) REAPER template file', "\n";
-print ' ┃out: "_lng', $mode, '_new.txt" ... Your new LangPack file', "\n";
-print ' ┃out: "_lng', $mode, '_missing.txt" ... List of obsolete translations in your old one', "\n";
+print ' ┃out: "_', $mode, '_lng_new.txt" ... Your new LangPack file', "\n";
+print ' ┃out: "_', $mode, '_lng_missing.txt" ... List of obsolete translations in your old one', "\n";
+print ' ┃out: "_', $mode, '_tmp_crr.txt" ... Current line-to-line template with "scaled" lines', "\n";
 print ' ┗━━━━━━━━━━━━━━━━━━━━━━━━', "\n";
 print "\n";
 print ' Enter your old LangPack name (without ".txt"):', "\n", '  > ';
@@ -155,8 +155,9 @@ foreach my $a (@lng_old)		# @lng_oldを頭から読む
 			if ($lng_new[$Lnw] =~ /^$section[$s+1]/)	# いま読んでいる@lng_oldの要素が属するセクションと
 			{											# 同じ@lng_new(≒@tmpl_crr)のセクションの末尾にスケール情報を追加
 				splice @lng_new, $Lnw-1, 0, $a;
-				splice @tmpl_crr, $Lnw-1, 0, ';5CA1E ; sized!';	# その分、@tmpl_crrの行数を@lng_newに合わせる
-				splice @tmpl_old, $Lol-1, 0, ';5CA1E ; sized!' if $mode == 1;	# 同様に、@tmpl_oldの行数を@lng_oldに合わせる
+				my $scaled = '5CA1E...........=*scaled*';
+				splice @tmpl_crr, $Lnw-1, 0, $scaled;				# その分、@tmpl_crrの行数を@lng_newに合わせる
+				splice @tmpl_old, $Lol-1, 0, $scaled if $mode == 1;	# 同様に、@tmpl_oldの行数を@lng_oldに合わせる
 				$hit = 1;
 			}
 			$Lnw++;
@@ -188,6 +189,7 @@ foreach my $a (@lng_old)		# @lng_oldを頭から読む
 		$a =~ /^(\w+?)=(.*)/;
 		my $code_a = $1; my $str_a = $2;
 		$Lnw = $startLnw;
+		$hit = 0;
 		while ($hit==0 and $Lnw<=$endLnw)	# @lng_newを頭から（または属するセクション内のみ）読む
 		{
 			if ($lng_new[$Lnw] =~ /^${yet_init}${code_a}=/)	# 未翻訳接頭辞付きのコード一致行ならば
@@ -221,7 +223,16 @@ foreach my $a (@lng_old)		# @lng_oldを頭から読む
 $| = 0;
 print "\n\n", ' Writing...', "\n\n";
 
-unshift @lng_missing, "; List of translations no longer used in \"${rnames[2]}\"\n\n";
+my @header = ('',
+" ┃in : ${rnames[0]}",
+" ┃in : ${rnames[2]}",
+" ┃out: _${mode}_lng_new.txt",
+" ┃out: _${mode}_lng_missing.txt",
+" ┃out: _${mode}_tmp_crr.txt",
+" ┗━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
+);
+splice @header, 2, 0, " ┃in : ${rnames[1]}" if $mode == 1;
+unshift @lng_missing, @header;
 pop @section;
 map { s/\\(\[|\])/$1/g } @lng_missing;
 map { s/\\(\[|\])/$1/g } @section;
@@ -244,7 +255,7 @@ sub writetxt
 &writetxt('lng_new');
 &writetxt('lng_missing');
 # &writetxt('section');
-# &writetxt('tmpl_crr');
+&writetxt('tmpl_crr');
 
 printf " (Time: %.3f sec)\n", Time::HiRes::time - $start_time;
 print "\n", ' Press enter to exit.', "\n";
