@@ -16,7 +16,7 @@ ReaPerLang v1.05
 
 ### 使う理由
 
-+ 行対行の状態になることで、訳すべき行の選択や template との比較が簡単になる。
++ 行対行の状態になることで、訳すべき行の選択や template との比較が簡単になる。  
   例: [Notepad++](https://notepad-plus-plus.org/) の分割表示機能で 2 つのファイルを同時に開いて `縦スクロールを同期` する。
 
 
@@ -125,7 +125,7 @@ The following must be `*.txt`, UTF-8 and placed in the same path as ReaPerLang.
 + Optional translations will be preserved even after processing.
 + To use this mode, you need not only an old LangPack and the newest template,  
   but also an old template file(※) used on previous conversion.  
-  (as downloaded in https://landoleet.org/i8n/ )
+  (※ as downloaded in https://landoleet.org/i8n/)
 
 
 ### Tips
