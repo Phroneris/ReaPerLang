@@ -8,7 +8,7 @@ ReaPerLang v1.05
 ### 概要
 
 + 度重なる翻訳作業や公式 merge tool の適用などにより中身がゴチャついた哀れな LangPack を、  
-  最新 template ファイルに適応した**完全な**行対行の一致状態へ「編集用最適化」するツール。
+  最新 template ファイルに適応した**行対行**の一致状態へ「編集用最適化」するツール。
 + 最適化の際、template 側で既に失われている翻訳行は `missing` ファイルへと隔離される。
 + `5CA1E00000000000=` のサイズ調整行を template 側に追加した、  
   **完全な**行対行の `tmpl_crr` ファイルも出力される。比較翻訳作業に活用しよう。
@@ -16,7 +16,7 @@ ReaPerLang v1.05
 
 ### 使う理由
 
-+ 行対行の状態になることで、訳すべき行の選択や template との比較が簡単になる。  
++ **行対行**の状態になることで、訳すべき行の選択や template との比較が簡単になる。  
   例: [Notepad++](https://notepad-plus-plus.org/) の分割表示機能で 2 つのファイルを同時に開いて `縦スクロールを同期` する。
 
 
@@ -80,13 +80,13 @@ ReaPerLang v1.05
 + LangPacks tend to be a mess by repeated translation work and the official merge tool.  
   This tool adapts such a LangPack file to the newest REAPER template smartly.
 + In optimization, lost translations in the template will move to a `missing` file.
-+ A `tmpl_crr` file will be also output as a **completely** line-to-line one  
++ A `tmpl_crr` file will be also output as a **line-to-line** one  
   with `5CA1E00000000000=` scaling lines. Make use of it for your comparative translation.
 
 
 ### Why ReaPerLang?
 
-+ You will get a new "work-optimized" Langpack which is **completely** line-to-line  
++ You will get a new "work-optimized" Langpack which is **line-to-line**  
   to compare easily with the template and select lines to translate.  
   (i.e. Open files in [Notepad++](https://notepad-plus-plus.org/) by multiple view and enable `Synchronise Vertical Scrolling`)
 
