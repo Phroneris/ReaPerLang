@@ -16,7 +16,7 @@ ReaPerLang v1.05
 
 ### 使う理由
 
-+ **行対行**の状態になることで、訳すべき行の選択や template との比較が簡単になる。  
++ **行対行**の状態になることで、訳すべき行の選択や template との比較が簡単・効率的になる。  
   例: [Notepad++](https://notepad-plus-plus.org/) の分割表示機能で 2 つのファイルを同時に開いて `縦スクロールを同期` する。
 
 
@@ -77,17 +77,17 @@ ReaPerLang v1.05
 
 ### Overview
 
-+ LangPacks tend to be a mess by repeated translation work and the official merge tool.  
-  This tool adapts such a LangPack file to the newest REAPER template smartly.
-+ In optimization, lost translations in the template will move to a `missing` file.
-+ A `tmpl_crr` file will be also output as a **line-to-line** one  
++ A LangPack tends to be a mess by repeated works and use of the official merge tool.  
+  This tool updates it as a **line-to-line** one which fits to the newest REAPER template.
++ On optimization, lost translations in the template will be moved to a `missing` file.
++ A `tmpl_crr` file will be also output as a **line-to-line** template  
   with `5CA1E00000000000=` scaling lines. Make use of it for your comparative translation.
 
 
 ### Why ReaPerLang?
 
-+ You will get a new "work-optimized" Langpack which is **line-to-line**  
-  to compare easily with the template and select lines to translate.  
++ You will get a new "work-optimized" Langpack file which is **line-to-line**  
+  to compare with the template easily and select lines to translate efficiently.  
   (i.e. Open files in [Notepad++](https://notepad-plus-plus.org/) by multiple view and enable `Synchronise Vertical Scrolling`)
 
 
