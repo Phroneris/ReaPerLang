@@ -17,7 +17,8 @@ ReaPerLang v1.05
 ### 使う理由
 
 + **行対行**の状態になることで、訳すべき行の選択や template との比較が簡単・効率的になる。  
-  例: [Notepad++](https://notepad-plus-plus.org/) の分割表示機能で 2 つのファイルを同時に開いて `縦スクロールを同期` する。
+  例: [Notepad++](https://notepad-plus-plus.org/) の分割表示機能で、
+  2 つのファイルを同時に開いて `縦スクロールを同期` する。
 
 
 ### 必要なもの
@@ -88,7 +89,8 @@ ReaPerLang v1.05
 
 + You will get a new "work-optimized" Langpack file which is **line-to-line**  
   to compare with the template easily and select lines to translate efficiently.  
-  (i.e. Open files in [Notepad++](https://notepad-plus-plus.org/) by multiple view and enable `Synchronise Vertical Scrolling`)
+  (i.e. Open files in [Notepad++](https://notepad-plus-plus.org/)
+  by multiple view and enable `Synchronise Vertical Scrolling`)
 
 
 ### Requirement
