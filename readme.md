@@ -11,7 +11,7 @@ ReaPerLang v1.05
   最新 template ファイルに適応した**行対行**の一致状態へ「編集用最適化」するツール。
 + 最適化の際、template 側で既に失われている翻訳行は `missing` ファイルへと隔離される。
 + `5CA1E00000000000=` のサイズ調整行を template 側に追加した、  
-  **完全な**行対行の `tmpl_crr` ファイルも出力される。比較翻訳作業に活用しよう。
+  行対行状態の `tmpl_crr` ファイルも出力される。比較翻訳作業に活用しよう。
 
 
 ### 使う理由
@@ -80,7 +80,7 @@ ReaPerLang v1.05
 + A LangPack tends to be a mess by repeated works and use of the official merge tool.  
   This tool updates it as a **line-to-line** one which fits to the newest REAPER template.
 + On optimization, lost translations in the template will be moved to a `missing` file.
-+ A `tmpl_crr` file will be also output as a **line-to-line** template  
++ A `tmpl_crr` file will be also output as a line-to-line template  
   with `5CA1E00000000000=` scaling lines. Make use of it for your comparative translation.
 
 
