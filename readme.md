@@ -2,7 +2,7 @@
 ReaPerLang v1.05
 ====
 
-![Demo](https://github.com/Phroneris/ReaperJPN-Phroneris/blob/develop/tool/example/img/demo.gif)
+![Demo](https://github.com/Phroneris/ReaperJPN-Phroneris/blob/develop/tool/demo/img/demo.gif)
 
 
 ### 概要
@@ -18,13 +18,13 @@ ReaPerLang v1.05
 
 + **行対行**の状態になることで、訳すべき行の選択や template との比較が簡単・効率的になる。  
   例: [Notepad++](https://notepad-plus-plus.org/) の分割表示機能で、
-  2 つのファイルを同時に開いて `縦スクロールを同期` する。
+  2 つのファイルを同時に開いて `縦スクロールを同期` して閲覧。
 
-  ![Line to Line](https://github.com/Phroneris/ReaperJPN-Phroneris/blob/develop/tool/example/img/line2line.gif)
+  ![Line to Line](https://github.com/Phroneris/ReaperJPN-Phroneris/blob/develop/tool/demo/img/line2line.gif)
 
 ### 必要なもの
 
-+ ReaPerLang (`bin/ReaPerLang.exe`)
++ ReaPerLang (`exe/ReaPerLang.exe`)
 
 以下は `*.txt` ファイル、UTF-8 形式とし、ReaPerLang と同じフォルダに置く。
 + LangPack ファイル
@@ -92,12 +92,12 @@ ReaPerLang v1.05
   (i.e. Open files in [Notepad++](https://notepad-plus-plus.org/)
   by multiple view and enable `Synchronise Vertical Scrolling`)
 
-  ![Line to Line](https://github.com/Phroneris/ReaperJPN-Phroneris/blob/develop/tool/example/img/line2line.gif)
+  ![Line to Line](https://github.com/Phroneris/ReaperJPN-Phroneris/blob/develop/tool/demo/img/line2line.gif)
 
 
 ### Requirement
 
-+ ReaPerLang (`bin/ReaPerLang.exe`)
++ ReaPerLang (`exe/ReaPerLang.exe`)
 
 The following must be `*.txt`, UTF-8 and placed in the same path as ReaPerLang.
 + LangPack file
@@ -155,7 +155,7 @@ The following must be `*.txt`, UTF-8 and placed in the same path as ReaPerLang.
 + Windows 7 Professional 64bit
 + Strawberry Perl (64-bit) 5.24.0.1-64bit
 + PAR::Packer 1.035
-+ `bin/buildexe.bat`
++ `exe/buildexe.bat`
 
 ### ライセンス (License)
 
