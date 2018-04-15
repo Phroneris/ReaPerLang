@@ -1,0 +1,21 @@
+#NAME:MyLanguage
+; It's
+; My
+; Description
+
+[common]
+CODE000000000001=Translated Hello
+CODE000000000002=Translated Bye
+;CODE000000000003=Thanks
+;CODE000000000004=OK
+
+[section1]
+SECTCODE10000001=Translated Sorry
+;^CODE000000000002=Bye
+
+[section2] ; Section comment
+;/SECTCODE20000001=Excuse me ; Comment out
+;^CODE000000000003=Thanks
+5CA1E00000000000=1.2
+
+[new_section]
