@@ -2,7 +2,7 @@
 ReaPerLang v1.05
 ====
 
-![Demo](https://github.com/Phroneris/ReaperJPN-Phroneris/blob/master/tool/demo.gif)
+![Demo](https://github.com/Phroneris/ReaperJPN-Phroneris/blob/develop/tool/example/img/demo.gif)
 
 
 ### 概要
@@ -20,11 +20,11 @@ ReaPerLang v1.05
   例: [Notepad++](https://notepad-plus-plus.org/) の分割表示機能で、
   2 つのファイルを同時に開いて `縦スクロールを同期` する。
 
+  ![Line to Line](https://github.com/Phroneris/ReaperJPN-Phroneris/blob/develop/tool/example/img/line2line.gif)
 
 ### 必要なもの
 
-+ Perl v5.20.2 ぐらい
-+ ReaPerLang (`ReaPerLang.pl`)
++ ReaPerLang (`bin/ReaPerLang.exe`)
 
 以下は `*.txt` ファイル、UTF-8 形式とし、ReaPerLang と同じフォルダに置く。
 + LangPack ファイル
@@ -59,8 +59,8 @@ ReaPerLang v1.05
 ### 諸注意
 
 + ファイルは上書きされる。
-+ Windows 以外での利用については知らない。  
-  多分文字化けが起こるので、`my $enc_os = 'cp932';` を utf8 とかにすれば良いかも。
++ Windows 日本語環境以外での動作はチェックしてない。  
+  コマンドラインが化ける場合、`my $enc_os = 'cp932';` を他のエンコードにすれば良いかも。
 + 文書冒頭の概要部も移植され、その際 `tmpl_crr` の概要部は行数を揃えられる。
 + template 側のファイル命名則が微妙に一致しない場合（v501 以前がそう）、事前に手修正よろしく。
 + `;/` で始まる LangPack 側の行は翻訳済み行と同様に移植されるので、コメントアウトに利用可能。
@@ -92,11 +92,12 @@ ReaPerLang v1.05
   (i.e. Open files in [Notepad++](https://notepad-plus-plus.org/)
   by multiple view and enable `Synchronise Vertical Scrolling`)
 
+  ![Line to Line](https://github.com/Phroneris/ReaperJPN-Phroneris/blob/develop/tool/example/img/line2line.gif)
+
 
 ### Requirement
 
-+ Perl v5.20.2 or something
-+ ReaPerLang (`ReaPerLang.pl`)
++ ReaPerLang (`bin/ReaPerLang.exe`)
 
 The following must be `*.txt`, UTF-8 and placed in the same path as ReaPerLang.
 + LangPack file
@@ -133,8 +134,8 @@ The following must be `*.txt`, UTF-8 and placed in the same path as ReaPerLang.
 ### Tips
 
 + Output Files will be overwritten.
-+ I don't know what will happen if RPL is used on non-Windows OS...  
-  You may get some garbling. Editing `my $enc_os = 'cp932';` to utf8 could make you happy.
++ I don't check behavior on non-Windows OS or non-Japanese environment.  
+  If the command line gets some garblings, editing `my $enc_os = 'cp932';` to utf8 could help.
 + The description area on the top of your file will also be transferred  
   and one in the `tmpl_crr` will be forced to have as many lines as it.
 + If template naming differs a bit from `template_reaper[version].ReaperLangPack.txt`  
@@ -149,6 +150,12 @@ The following must be `*.txt`, UTF-8 and placed in the same path as ReaPerLang.
 
 ----
 
+### ビルド (build)
+
++ Windows 7 Professional 64bit
++ Strawberry Perl (64-bit) 5.24.0.1-64bit
++ PAR::Packer 1.035
++ `bin/buildexe.bat`
 
 ### ライセンス (License)
 
