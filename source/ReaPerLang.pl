@@ -13,9 +13,9 @@ use Encode qw/encode decode/;
 my $enc_os = 'cp932';	# Windows JP
 use PerlIO::encoding;	# for building exe
 use Encode::JP;			# for building exe
-use Encode::CN;
-use Encode::KR;
-use Encode::TW;
+use Encode::CN;			# 念のため
+use Encode::KR;			# 念のため
+use Encode::TW;			# 念のため
 binmode STDIN,  ":encoding(${enc_os})";	# 標準入出力で cp932(見た目)⇔UTF-8(内部) と変換する
 binmode STDOUT, ":encoding(${enc_os})";
 binmode STDERR, ":encoding(${enc_os})";
