@@ -1,6 +1,6 @@
 @echo off
 pushd %~dp0..
-set src=%cd%\src\
+set src=%cd%\source\
 popd
 set rpl=ReaPerLang
 
