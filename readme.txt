@@ -1,1 +1,1 @@
-https://github.com/Phroneris/ReaperJPN-Phroneris/wiki/ReaPerLang-ReadMe
+Wiki: https://github.com/Phroneris/ReaperJPN-Phroneris/wiki/ReaPerLang-ReadMe
