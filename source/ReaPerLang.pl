@@ -44,10 +44,12 @@ sub readTxt
 {
 	my ($rname, $f);
 	my @default = ('MyLangpack', '00', '01');
+	# my @default = ('JPN_Phroneris', '580rc1', '590');
 	my $i = $_[0];
 	if ($devmode==1)
 	{
 		$rname = '';
+		print "\n";
 	}else{
 		chomp($rname = <STDIN>);
 	}
@@ -106,7 +108,7 @@ elsif ($mode eq '1d')
 	$devmode = 1;
 	$mode = 1;
 }else{
-	&abort("Invalid value.\n",1);
+	&abort("Invalid value.\n", 1);
 }
 
 $indent = ' ';
@@ -122,8 +124,8 @@ print ' ┗━━━━━━━━━━━━━━━━━━━━━━━
 print "\n";
 print ' Enter your old LangPack name (without ".txt"):', "\n", '  > ';
 my @lng_old = &readTxt(0);
-my @lng_dsc = &divDsc(1,@lng_old);
-@lng_old = &divDsc(0,@lng_old);
+my @lng_dsc = &divDsc(1, @lng_old);
+@lng_old = &divDsc(0, @lng_old);
 
 print ' Enter the [version] of "template_reaper[version].ReaperLangPack.txt" ';
 my @tmpl_old if $mode == 1;
@@ -131,17 +133,17 @@ if ($mode == 1)
 {
 	print '(the older and current)', "\n";
 	print '  The older: > ';
-	@tmpl_old = &divDsc(0,&readTxt(1));
+	@tmpl_old = &divDsc(0, &readTxt(1));
 	print '  Current: > ';
 }else{
-	print '(current)', "\n";
+	print '(current):', "\n";
 	print '  > ';
 }
 my @tmpl_crr;
 @tmpl_crr = &readTxt(2);
 my @tmpl_dsc;
-@tmpl_dsc = &divDsc(1,@tmpl_crr);
-@tmpl_crr = &divDsc(0,@tmpl_crr);
+@tmpl_dsc = &divDsc(1, @tmpl_crr);
+@tmpl_crr = &divDsc(0, @tmpl_crr);
 if ($#lng_dsc>$#tmpl_dsc)
 {
 	for (my $i=$#tmpl_dsc; $i<$#lng_dsc; $i++) {
@@ -159,7 +161,7 @@ my @lng_missing = ();
 my @section = grep { /^\[/ } @lng_old;
 my @endsec = ('[endsec_RPL]');
 push @section, @endsec;
-map { $_=~/^(\[.+?\])(.*)$/; $_=[$1,$2] } @section;		# $section[section名][その後のコメント]
+map { $_=~/^(\[.+?\])(.*)$/; $_=[$1,$2] } @section;		# $section[セクション名][その後のコメント]
 push @lng_new, @endsec;
 
 my $Lol = 0;	# @lng_oldの行数
@@ -191,7 +193,7 @@ foreach my $a (@lng_old)		# @lng_oldを頭から読む
 
 	my $Lnw = 0;	# @lng_newの行数
 	my $hit = 0;	# 一致した奴ありましたよ判定(0/1)
-	$DB::single=1 if $Lol>=11;
+	# $DB::single=1 if $Lol>=11;
 	
 	if ($a =~ /^\[/)	# セクション名の行ならば
 	{
@@ -200,9 +202,9 @@ foreach my $a (@lng_old)		# @lng_oldを頭から読む
 		$Lnw = $Lns_btm + 1;
 		while ($hit<1 and $Lnw<=$#lng_new)
 		{
-			if ($lng_new[$Lnw] =~ /^\Q$section[$s][0]/)	# @lng_oldのセクション名部分のコメント込みで
-			{											# @lng_new(≒@tmpl_crr)にセクション名を記載
-				$lng_new[$Lnw]=$a;
+			if ($lng_new[$Lnw] =~ /^\Q$section[$s][0]/)
+			{
+				$lng_new[$Lnw]=$a;		# @lng_new（≒@tmpl_crr）にセクション名を記載（セクションコメント込み）
 				$Lns_top = $Lnw;		# @lng_newを読む時の範囲を同名セクション内のみに抑制（上限）
 				$hit = -1;
 			}
@@ -222,7 +224,7 @@ foreach my $a (@lng_old)		# @lng_oldを頭から読む
 		splice @tmpl_old, $Lol, 0, $scaled if $mode == 1;	# 同様に、@tmpl_oldの行数を@lng_oldに合わせる
 		$Lns_btm++;
 	}
-	elsif ($a =~ /^((?:;\/\^?)?)(\w+?)=(.*)/)	# スケール情報ではない、翻訳済み行または意図的な無効化行ならば
+	elsif ($a =~ /^((?:;\/\^?)?)(\w{16})=(.*)/)	# スケール情報ではない、翻訳済み行または意図的な無効化行ならば
 	{
 		my $oo_a = $1;	# ;/ または ;/^ の意図的な無効化行（opt-out、「（森）」の独自記法）
 		my $code_a = $2;
@@ -255,7 +257,7 @@ foreach my $a (@lng_old)		# @lng_oldを頭から読む
 			{
 				my $str_sub = $tmpl_old[$Lol] =~ s/^;\^?//r;
 				$a =~ s/^(?:;\/\^?)?//;
-				$yet_init = $oo_a if $oo_a;	# 意図的な無効化行ならそれを接頭辞として利用
+				$yet_init = $oo_a if $oo_a;	# 接頭辞指定。意図的な無効化行ならそれを、そうでないならオプション行区別のために元のを。
 				push @lng_missing, $yet_init.$str_sub, $yet_init.$a;
 			}else{
 				push @lng_missing, $a;
@@ -280,8 +282,8 @@ my @header = (
 "┃out: _${mode}_lng_new.txt",
 "┃out: _${mode}_lng_missing.txt",
 "┃out: _${mode}_tmp_crr.txt",
-"┃date: ${date} (local)",
-"┃time: ${time} sec",
+"┃Date: ${date} (local)",
+"┃Time: ${time} sec",
 "┗━━━━━━━━━━━━━━━━━━━━━"
 );
 splice @header, 3, 0, "┃in : ${rnames[1]}" if $mode == 1;
