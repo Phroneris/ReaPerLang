@@ -1,0 +1,8 @@
+# あらゆる _ignore フォルダを無視
+_ignore/
+
+# source フォルダでコードでない全ファイルを無視
+/source/*.*
+!/source/ReaPerLang.pl
+!/source/buildexe.bat
+!/source/copyPhroneris.bat
