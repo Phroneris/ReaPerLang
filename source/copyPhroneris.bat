@@ -3,7 +3,7 @@ pushd %~dp0..\..
 set main=%cd%\
 popd
 set ph=JPN_Phroneris
-set mainL="%main%%ph%._RLP"
+set mainL="%main%%ph%.ReaperLangPack"
 
 echo Main folder: %main%
 echo,
