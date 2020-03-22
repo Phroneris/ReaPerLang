@@ -6,6 +6,10 @@ my $ReaPerLang = 'ReaPerLang ver 1.06';
 use autodie    ;	# エラー時に$@を得るため
 use Time::HiRes;	# 最後に経過時間を出すため
 
+
+
+##### 文字エンコーディング関連
+
 use utf8;								# このファイル内に直接書いたUTF-8文字列を全て内部文字列にする
 use open OUT => ':utf8';				# ファイル出力を全て '>:encoding(UTF-8)' で行う
 use Encode qw/encode decode/;
@@ -26,6 +30,10 @@ sub dc($) { decode($enc_os, shift) };
 sub ec($) { encode($enc_os, shift) };
 sub ed($) { ec(du(shift)) };	# デバッグ時にpで文字列が化けたら"ec $var"または"ed $var"で戻せることが多い
 # sub isN($) { Encode::is_utf8(shift) ? 'naibu' : 'hadaka kamo...'; }
+
+
+
+##### 関数
 
 my $indent = '';
 sub abort
@@ -77,6 +85,12 @@ sub divDsc
 	return grep { $flg = /^\[common\]/ ? !$flg : $flg } @_;
 }
 
+
+
+##### 標準入力
+
+# モード選択
+
 print $ReaPerLang, "\n";
 print <<'EOP';
 
@@ -111,6 +125,9 @@ elsif ($mode eq '1d')
 	&abort("Invalid value.\n", 1);
 }
 
+
+# ファイル指定
+
 $indent = ' ';
 print "\n\n";
 print ' Files in & out (make sure that all are UTF-8 ".txt" files)', "\n";
@@ -141,6 +158,10 @@ if ($mode == 1)
 }
 my @tmpl_crr;
 @tmpl_crr = &readTxt(2);
+
+
+# missingファイルのセクション残留オプション
+
 print ' [Option] Keep empty sections in "_', $mode, '_lng_missing.txt" ?', "\n";
 print '  Yes=y/No=n: > ';
 my $emp_section;
@@ -159,6 +180,9 @@ elsif ($emp_section =~ /^(?:no?)?$/i)	# 無記入はNoとする
 }
 print "\n\n";
 
+
+# 概要部の分離処理
+
 my @tmpl_dsc;
 @tmpl_dsc = &divDsc(1, @tmpl_crr);
 @tmpl_crr = &divDsc(0, @tmpl_crr);
@@ -172,6 +196,12 @@ elsif ($#lng_dsc<$#tmpl_dsc)
 {
 	splice @tmpl_dsc, $#lng_dsc-1, $#tmpl_dsc, "; /* ... the rest of this description is cut off by $ReaPerLang */", '';
 }
+
+
+
+##### メイン
+
+# 前処理と宣言
 
 my $start_time = Time::HiRes::time;
 my @lng_new = @tmpl_crr;
@@ -192,11 +222,15 @@ sub insertSectionName
 	my $s = shift;
 	push @lng_missing, ('', $section[$s][0].$section[$s][1]);	# "(改行) セクション名+コメント" の形で@lng_missing内に配置
 }
+
+
+# @lng_oldを頭から読んで各行処理
+
 my $p_int = 0;
 print ' Processing...', "\n";
 $| = 1;	# オートフラッシュ（printを即出力する）
 
-foreach my $a (@lng_old)		# @lng_oldを頭から読む
+foreach my $a (@lng_old)
 {
 
 	my $p_prev = $p_int;
@@ -303,6 +337,10 @@ $| = 0;
 my $time = sprintf("%.3f", Time::HiRes::time - $start_time);
 print "\n\n", ' Writing...', "\n\n";
 
+
+
+##### 後処理と出力
+
 $emp_section = $emp_section==1 ? 'Yes' : 'No';
 my $date = localtime;
 my @header = (
@@ -320,7 +358,7 @@ my @header = (
 splice @header, 3, 0, "┃in : ${rnames[1]}" if $mode == 1;
 unshift @lng_missing, @header;
 map { $_=$_->[0].$_->[1] } @section;
-pop @section;
+splice @section, -1;
 splice @lng_new, -2;
 unshift @lng_new, @lng_dsc;
 unshift @tmpl_crr, @tmpl_dsc;
