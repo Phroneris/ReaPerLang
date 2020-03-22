@@ -207,10 +207,10 @@ my $start_time = Time::HiRes::time;
 my @lng_new = @tmpl_crr;
 my @lng_missing = ();
 my @section = grep { /^\[/ } @lng_old;
-my @endsec = ('[endsec_RPL]');
-push @section, @endsec;
+my $endsec = '[endsec_RPL]';
+push @section, $endsec;
 map { $_=~/^(\[.+?\])(.*)$/; $_=[$1,$2] } @section;		# $section[セクション名][その後のコメント]
-push @lng_new, @endsec;
+push @lng_new, ('', $endsec);
 
 my $Lol = 0;	# @lng_oldの行数
 my $s = -1;		# @sectionの要素数
