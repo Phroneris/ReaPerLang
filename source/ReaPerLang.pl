@@ -313,16 +313,16 @@ foreach my $a (@lng_old)
 		}
 		if ($hit == 0)		# @lng_oldと@tmpl_crrでコード一致の行が全くないならば
 		{
+			if ($emp_section==0 and $is_s1st==1)
+			{
+				&insertSectionName($s);
+				$is_s1st = 0;
+			}
 			if ($mode == 1)
 			{
 				my $str_sub = $tmpl_old[$Lol] =~ s/^;\^?//r;
 				$a =~ s/^(?:;\/\^?)?//;
 				$yet_init = $oo_a if $oo_a;	# 接頭辞指定。意図的な無効化行ならそれを、そうでないならオプション行区別のために元のを。
-				if ($emp_section==0 and $is_s1st==1)
-				{
-					&insertSectionName($s);
-					$is_s1st = 0;
-				}
 				push @lng_missing, $yet_init.$str_sub, $yet_init.$a;
 			}else{
 				push @lng_missing, $a;
