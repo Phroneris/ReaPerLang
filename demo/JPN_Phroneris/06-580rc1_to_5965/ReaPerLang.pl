@@ -1,14 +1,10 @@
 #!/usr/local/bin/perl
-my $ReaPerLang = 'ReaPerLang ver 1.10';
+my $ReaPerLang = 'ReaPerLang ver 1.06';
 
 # use strict  ;		# デバッグ用
 # use warnings;		# デバッグ用
 use autodie    ;	# エラー時に$@を得るため
 use Time::HiRes;	# 最後に経過時間を出すため
-
-
-
-##### 文字エンコーディング関連
 
 use utf8;								# このファイル内に直接書いたUTF-8文字列を全て内部文字列にする
 use open OUT => ':utf8';				# ファイル出力を全て '>:encoding(UTF-8)' で行う
@@ -31,10 +27,6 @@ sub ec($) { encode($enc_os, shift) };
 sub ed($) { ec(du(shift)) };	# デバッグ時にpで文字列が化けたら"ec $var"または"ed $var"で戻せることが多い
 # sub isN($) { Encode::is_utf8(shift) ? 'naibu' : 'hadaka kamo...'; }
 
-
-
-##### 関数
-
 my $indent = '';
 sub abort
 {
@@ -47,13 +39,12 @@ sub abort
 }
 
 my $devmode = 0;
-my $pname;
-my @rfiles = ();
+my @rnames = ();
 sub readTxt
 {
-	my ($rname, $rfile, $f);
+	my ($rname, $f);
 	my @default = ('MyLangpack', '00', '01');
-	# my @default = ('JPN_Phroneris', '5965', '5982');
+	# my @default = ('JPN_Phroneris', '580rc1', '590');
 	my $i = $_[0];
 	if ($devmode==1)
 	{
@@ -63,17 +54,16 @@ sub readTxt
 		chomp($rname = <STDIN>);
 	}
 	$rname = $rname eq '' ? $default[$i] : $rname;
-	$rname = "template_reaper${rname}" if $i != 0;
-	$pname = $rname =~ s/(\.ReaperLangPack)?(\.txt)?$//inr if $i == 0;
-	foreach my $e ('.ReaperLangPack', '.txt', '.ReaperLangPack.txt', '')
+	if ($i == 0)
 	{
-		$rfile = "${rname}${e}";
-		$rfiles[$i] = $rfile;
-		print ' Searching... ', $rfile, "\n";
-		last if -f $rfile;
-	}	# 無くてもとりあえずループからは抜ける
-	eval { open $f, '<', ec($rfile) };
-	&abort("Can't open a file specified as \"${rname}.*\" for reading.\n", 1) if $@;	# エラー時
+		$rname = "${rname}.txt";
+	}else{
+		$rname = "template_reaper${rname}.ReaperLangPack.txt";
+	}
+	$rnames[$i] = $rname;
+	print ' Reading... ', $rname, "\n";
+	eval { open $f, '<', ec($rname) };
+	&abort($@) if $@;	# エラー時
 	my @txt = <$f>;		# 非エラー時
 	close $f;
 	print ' OK!', "\n\n";
@@ -86,12 +76,6 @@ sub divDsc
 	my $flg = shift;	# 0なら文書冒頭の概要部以外を、1なら概要部だけを返す
 	return grep { $flg = /^\[common\]/ ? !$flg : $flg } @_;
 }
-
-
-
-##### 標準入力
-
-# モード選択
 
 print $ReaPerLang, "\n";
 print <<'EOP';
@@ -127,26 +111,23 @@ elsif ($mode eq '1d')
 	&abort("Invalid value.\n", 1);
 }
 
-
-# ファイル指定
-
 $indent = ' ';
 print "\n\n";
-print ' Files in & out (All are UTF-8 text)', "\n";
+print ' Files in & out (make sure that all are UTF-8 ".txt" files)', "\n";
 print ' ┃in : Your old LangPack file', "\n";
 print ' ┃in : Old REAPER template file the above LangPack has been adapted to', "\n" if $mode == 1;
 print ' ┃in : Current (the newest) REAPER template file', "\n";
-print ' ┃out: Your new LangPack file', "\n";
-print ' ┃out: List of "missing" (currently obsolete) translations', "\n";
-print ' ┃out: Current line-to-line REAPER template file', "\n";
+print ' ┃out: "_', $mode, '_lng_new.txt" ... Your new LangPack file', "\n";
+print ' ┃out: "_', $mode, '_lng_missing.txt" ... List of obsolete translations in your old one', "\n";
+print ' ┃out: "_', $mode, '_tmp_crr.txt" ... Current line-to-line template with "scaled" lines', "\n";
 print ' ┗━━━━━━━━━━━━━━━━━━━━━━━━', "\n";
 print "\n";
-print ' Enter your old LangPack name (extension can be omitted):', "\n", '  > ';
+print ' Enter your old LangPack name (without ".txt"):', "\n", '  > ';
 my @lng_old = &readTxt(0);
 my @lng_dsc = &divDsc(1, @lng_old);
 @lng_old = &divDsc(0, @lng_old);
 
-print ' Enter the [version] of "template_reaper[version].(extension)" ';
+print ' Enter the [version] of "template_reaper[version].ReaperLangPack.txt" ';
 my @tmpl_old if $mode == 1;
 if ($mode == 1)
 {
@@ -160,11 +141,7 @@ if ($mode == 1)
 }
 my @tmpl_crr;
 @tmpl_crr = &readTxt(2);
-
-
-# missingファイルのセクション残留オプション
-
-print ' [Option] Leave empty sections in the "missing" list?', "\n";
+print ' [Option] Keep empty sections in "_', $mode, '_lng_missing.txt" ?', "\n";
 print '  Yes=y/No=n: > ';
 my $emp_section;
 chomp($emp_section = <STDIN>);
@@ -182,9 +159,6 @@ elsif ($emp_section =~ /^(?:no?)?$/i)	# 無記入はNoとする
 }
 print "\n\n";
 
-
-# 概要部の分離処理
-
 my @tmpl_dsc;
 @tmpl_dsc = &divDsc(1, @tmpl_crr);
 @tmpl_crr = &divDsc(0, @tmpl_crr);
@@ -196,23 +170,17 @@ if ($#lng_dsc>$#tmpl_dsc)
 }
 elsif ($#lng_dsc<$#tmpl_dsc)
 {
-	splice @tmpl_dsc, $#lng_dsc-1, $#tmpl_dsc, ";/ ... the rest of this description is cut off by $ReaPerLang", '';
+	splice @tmpl_dsc, $#lng_dsc-1, $#tmpl_dsc, "; /* ... the rest of this description is cut off by $ReaPerLang */", '';
 }
-
-
-
-##### メイン
-
-# 前処理と宣言
 
 my $start_time = Time::HiRes::time;
 my @lng_new = @tmpl_crr;
 my @lng_missing = ();
 my @section = grep { /^\[/ } @lng_old;
-my $endsec = '[endsec_RPL]';
-push @section, $endsec;
+my @endsec = ('[endsec_RPL]');
+push @section, @endsec;
 map { $_=~/^(\[.+?\])(.*)$/; $_=[$1,$2] } @section;		# $section[セクション名][その後のコメント]
-push @lng_new, ('', $endsec);
+push @lng_new, @endsec;
 
 my $Lol = 0;	# @lng_oldの行数
 my $s = -1;		# @sectionの要素数
@@ -224,15 +192,11 @@ sub insertSectionName
 	my $s = shift;
 	push @lng_missing, ('', $section[$s][0].$section[$s][1]);	# "(改行) セクション名+コメント" の形で@lng_missing内に配置
 }
-
-
-# @lng_oldを頭から読んで各行処理
-
 my $p_int = 0;
 print ' Processing...', "\n";
 $| = 1;	# オートフラッシュ（printを即出力する）
 
-foreach my $a (@lng_old)
+foreach my $a (@lng_old)		# @lng_oldを頭から読む
 {
 
 	my $p_prev = $p_int;
@@ -290,7 +254,7 @@ foreach my $a (@lng_old)
 		my $code_a = $2;
 		my $str_a = $3;
 		my $yet_init = ';';	# 未翻訳接頭辞
-		if (($mode==0 and $oo_a=~/;\/\^/) or ($mode==1 and $tmpl_old[$Lol]=~/^;\^/))
+		if ($mode==1 and $tmpl_old[$Lol]=~/^;\^/)
 		{
 			$yet_init = ';^';
 		}
@@ -313,16 +277,16 @@ foreach my $a (@lng_old)
 		}
 		if ($hit == 0)		# @lng_oldと@tmpl_crrでコード一致の行が全くないならば
 		{
-			if ($emp_section==0 and $is_s1st==1)
-			{
-				&insertSectionName($s);
-				$is_s1st = 0;
-			}
 			if ($mode == 1)
 			{
 				my $str_sub = $tmpl_old[$Lol] =~ s/^;\^?//r;
 				$a =~ s/^(?:;\/\^?)?//;
 				$yet_init = $oo_a if $oo_a;	# 接頭辞指定。意図的な無効化行ならそれを、そうでないならオプション行区別のために元のを。
+				if ($emp_section==0 and $is_s1st==1)
+				{
+					&insertSectionName($s);
+					$is_s1st = 0;
+				}
 				push @lng_missing, $yet_init.$str_sub, $yet_init.$a;
 			}else{
 				push @lng_missing, $a;
@@ -339,56 +303,47 @@ $| = 0;
 my $time = sprintf("%.3f", Time::HiRes::time - $start_time);
 print "\n\n", ' Writing...', "\n\n";
 
-
-
-##### 後処理と出力
-
 $emp_section = $emp_section==1 ? 'Yes' : 'No';
 my $date = localtime;
-my @wfiles = (
-	"_${mode}_${rfiles[0]}",
-	"_${mode}_${pname}_missing.txt",
-	"_${mode}_${rfiles[2]}",
-	"_${mode}_${pname}_section.txt"
-);
 my @header = (
-	"Generated by ${ReaPerLang}",
-	"┃in : ${rfiles[0]}",	# 旧言語パック
-	"┃in : ${rfiles[2]}",	# 旧テンプレート
-	"┃out: ${wfiles[0]}",	# 新言語パック
-	"┃out: ${wfiles[1]}",	# missing
-	"┃out: ${wfiles[2]}",	# 新テンプレート
-	"┃Leave empty sections: ${emp_section}",
-	"┃Date: ${date} (local)",
-	"┃Time: ${time} sec",
-	"┗━━━━━━━━━━━━━━━━━━━━━"
+"Generated by ${ReaPerLang}",
+"┃in : ${rnames[0]}",
+"┃in : ${rnames[2]}",
+"┃out: _${mode}_lng_new.txt",
+"┃out: _${mode}_lng_missing.txt",
+"┃out: _${mode}_tmp_crr.txt",
+"┃Keep empty sections: ${emp_section}",
+"┃Date: ${date} (local)",
+"┃Time: ${time} sec",
+"┗━━━━━━━━━━━━━━━━━━━━━"
 );
-splice @header, 2, 0, "┃in : ${rfiles[1]}" if $mode == 1;
+splice @header, 3, 0, "┃in : ${rnames[1]}" if $mode == 1;
 unshift @lng_missing, @header;
 map { $_=$_->[0].$_->[1] } @section;
-splice @section, -1;
+pop @section;
 splice @lng_new, -2;
 unshift @lng_new, @lng_dsc;
 unshift @tmpl_crr, @tmpl_dsc;
 
 sub writeTxt
 {
-	my $wfile = $wfiles[shift];
-	my @txt = @_;
+	my $name  = shift;
 	my $f;
-
+	my $wname = "_${mode}_${name}.txt";
+	my @txt = eval "\@$name";
 	map { $_=$_."\n" } @txt;
-	eval { open $f, '>', ec($wfile) };
+
+	eval { open $f, '>', ec($wname) };
 	&abort($@) if $@;	# エラー時
 	print $f @txt;		# 非エラー時
 	close $f;
-	print ' Complete writing "', $wfile, '": about ', $#txt, " lines.\n";
+	print ' Complete writing "', $wname, '": about ', $#txt, " lines.\n";
 }
 
-&writeTxt(0, @lng_new);
-&writeTxt(1, @lng_missing);
-&writeTxt(2, @tmpl_crr);
-# &writeTxt(3, @section);
+&writeTxt('lng_new');
+&writeTxt('lng_missing');
+# &writeTxt('section');
+&writeTxt('tmpl_crr');
 
 print ' (Time: ', "$time", ' sec)', "\n";
 print "\n", ' Press enter to exit.', "\n";
