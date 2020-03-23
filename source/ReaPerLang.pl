@@ -290,7 +290,7 @@ foreach my $a (@lng_old)
 		my $code_a = $2;
 		my $str_a = $3;
 		my $yet_init = ';';	# 未翻訳接頭辞
-		if ($mode==1 and $tmpl_old[$Lol]=~/^;\^/)
+		if (($mode==0 and $oo_a=~/;\/\^/) or ($mode==1 and $tmpl_old[$Lol]=~/^;\^/))
 		{
 			$yet_init = ';^';
 		}
