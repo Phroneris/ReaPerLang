@@ -15,7 +15,8 @@ SECTCODE10000001=Translated Sorry
 
 [section2] ; Section comment
 ;/SECTCODE20000001=Excuse me ; Comment out
-;^CODE000000000003=Thanks
+CODE000000000003=Optionally translated Thanks
 5CA1E00000000000=1.2
 
 [new_section]
+;SECTCODEN0000001=See you
