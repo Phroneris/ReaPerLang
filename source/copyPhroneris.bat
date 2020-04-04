@@ -2,8 +2,8 @@
 pushd %~dp0..\..
 set main=%cd%\
 popd
-set ph=JPN_Phroneris
-set mainL="%main%%ph%.ReaperLangPack"
+set ph=JPN_Phroneris.ReaperLangPack
+set mainL="%main%%ph%"
 
 echo Main folder: %main%
 echo,
@@ -14,26 +14,22 @@ if aaa%input%==aaas goto Send
 goto End
 
 :Bring
-set hereL="%ph%.txt"
 @echo on
-copy /Y %mainL% %hereL%
+copy /Y %mainL% %ph%
 @echo off
 echo,
 goto End
 
 :Send
-set hereNewL=_1_lng_new.txt
 @echo on
-copy /Y %hereNewL% %mainL%
+copy /Y "_1_%ph%" %mainL%
 @echo off
-set hereNewT=_1_tmpl_crr.txt
 set preT=template_reaper
 set postT=.ReaperLangPack.txt
 echo,
 set /p verT="%preT%***%postT% > "
-set mainT="%main%%preT%%verT%%postT%"
 @echo on
-copy /Y %hereNewT% %mainT%
+copy /Y "_1_%preT%%verT%%postT%" "%main%%preT%%verT%%postT%"
 @echo off
 echo,
 goto End
