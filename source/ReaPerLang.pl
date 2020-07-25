@@ -181,7 +181,7 @@ my @tmpl_crr;
 # missingファイルのセクション残留オプション
 
 print ' [Option] Leave empty sections in the "missing" list?', "\n";
-print '  Yes=y/No=n: > ';
+print '  Yes=y, No=n/(blank): > ';
 my $emp_section;
 chomp($emp_section = <STDIN>);
 if ($emp_section =~ /^y(?:es)?$/i)	# 大文字/小文字の差は無視
