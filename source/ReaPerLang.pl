@@ -63,8 +63,12 @@ sub readTxt
 		chomp($rname = <STDIN>);
 	}
 	$rname = $rname eq '' ? $default[$i] : $rname;
-	$rname = "template_reaper${rname}" if $i != 0;
-	$pname = $rname =~ s/(\.ReaperLangPack)?(\.txt)?$//inr if $i == 0;
+	if ($i == 0)	# 自分の旧LangPackを読む場合
+	{
+		$pname = $rname =~ s/(\.ReaperLangPack)?(\.txt)?$//inr;
+	}else{
+		$rname = "template_reaper${rname}";
+	}
 	foreach my $e ('.ReaperLangPack', '.txt', '.ReaperLangPack.txt', '')
 	{
 		$rfile = "${rname}${e}";
