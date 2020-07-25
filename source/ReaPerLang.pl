@@ -185,7 +185,13 @@ my @tmpl_crr;
 print ' [Option] Leave empty sections in the "missing" list?', "\n";
 print '  Yes=y, No=n/(blank): > ';
 my $emp_section;
-chomp($emp_section = <STDIN>);
+if ($devmode==1)
+{
+	$emp_section = '';
+	print "\n";
+}else{
+	chomp($emp_section = <STDIN>);
+}
 if ($emp_section =~ /^y(?:es)?$/i)	# 大文字/小文字の差は無視
 {
 	$emp_section = 1;
