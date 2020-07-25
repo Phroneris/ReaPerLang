@@ -24,7 +24,7 @@ goto End
 @echo on
 copy /Y "_1_%ph%" %mainL%
 @echo off
-set preT=template_reaper
+set preT=reaper
 set postT=.ReaperLangPack.txt
 echo,
 set /p verT="%preT%***%postT% > "

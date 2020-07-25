@@ -63,21 +63,33 @@ sub readTxt
 		chomp($rname = <STDIN>);
 	}
 	$rname = $rname eq '' ? $default[$i] : $rname;
+	my @heads;
 	if ($i == 0)	# 自分の旧LangPackを読む場合
 	{
 		$pname = $rname =~ s/(\.ReaperLangPack)?(\.txt)?$//inr;
-	}else{
-		$rname = "template_reaper${rname}";
+		@heads = ('');
+	}else{			# テンプレートを読み込む場合
+		$rname = "reaper${rname}";
+		@heads = ('', 'template_');
 	}
-	foreach my $e ('.ReaperLangPack', '.txt', '.ReaperLangPack.txt', '')
+	foreach my $head (@heads)
 	{
-		$rfile = "${rname}${e}";
-		$rfiles[$i] = $rfile;
-		print ' Searching... ', $rfile, "\n";
-		last if -f $rfile;
+		my $found = 0;
+		foreach my $ext ('.ReaperLangPack', '.txt', '.ReaperLangPack.txt', '')
+		{
+			$rfile = "${head}${rname}${ext}";
+			$rfiles[$i] = $rfile;
+			print ' Searching... ', $rfile, "\n";
+			if (-f $rfile)
+			{
+				$found = 1;
+				last;
+			}
+		}
+		last if $found;
 	}	# 無くてもとりあえずループからは抜ける
 	eval { open $f, '<', ec($rfile) };
-	&abort("Can't open a file specified as \"${rname}.*\" for reading.\n", 1) if $@;	# エラー時
+	&abort("Can't find a \"${rname}\"-like file for reading.\n", 1) if $@;	# エラー時
 	my @txt = <$f>;		# 非エラー時
 	close $f;
 	print ' OK!', "\n\n";
@@ -150,16 +162,16 @@ my @lng_old = &readTxt(0);
 my @lng_dsc = &divDsc(1, @lng_old);
 @lng_old = &divDsc(0, @lng_old);
 
-print ' Enter the [version] of "template_reaper[version].(extension)" ';
+print ' Enter the version in ';
 my @tmpl_old if $mode == 1;
 if ($mode == 1)
 {
-	print '(the older and current)', "\n";
+	print 'each template name (the older and current)', "\n";
 	print '  The older: > ';
 	@tmpl_old = &divDsc(0, &readTxt(1));
 	print '  Current: > ';
 }else{
-	print '(current):', "\n";
+	print 'the current template name:', "\n";
 	print '  > ';
 }
 my @tmpl_crr;
