@@ -53,7 +53,7 @@ sub readTxt
 {
 	my ($rname, $rfile, $f);
 	my @default = ('MyLangpack', '00', '01');
-	# my @default = ('JPN_Phroneris', '5965', '5982');
+	# my @default = ('JPN_Phroneris', '5982', '613');
 	my $i = $_[0];
 	if ($devmode==1)
 	{
@@ -192,7 +192,7 @@ if ($devmode==1)
 }else{
 	chomp($emp_section = <STDIN>);
 }
-if ($emp_section =~ /^y(?:es)?$/i)	# 大文字/小文字の差は無視
+if ($emp_section =~ /^y(?:es)?$/i)		# 大文字/小文字の差は無視
 {
 	$emp_section = 1;
 	# print ' All-section mode!';
@@ -237,6 +237,8 @@ print "\n";
 
 
 
+##### メイン
+
 # 概要部の分離処理
 
 my @tmpl_dsc;
@@ -253,9 +255,6 @@ elsif ($#lng_dsc<$#tmpl_dsc)
 	splice @tmpl_dsc, $#lng_dsc-1, $#tmpl_dsc, ";/ ... the rest of this description is cut off by $ReaPerLang", '';
 }
 
-
-
-##### メイン
 
 # 前処理と宣言
 
@@ -421,7 +420,7 @@ sub writeTxt
 	&abort($@) if $@;	# エラー時
 	print $f @txt;		# 非エラー時
 	close $f;
-	print ' Complete writing "', $wfile, '": about ', $#txt, " lines.\n";
+	print ' Completed writing "', $wfile, '": about ', $#txt, " lines.\n";
 }
 
 &writeTxt(0, @lng_new);
