@@ -79,11 +79,14 @@ sub readTxt
 		{
 			$rfile = "${head}${rname}${ext}";
 			$rfiles[$i] = $rfile;
-			print ' Searching... ', $rfile, "\n";
+			print ' Searching... ', $rfile;
 			if (-f $rfile)
 			{
 				$found = 1;
+				print '  <- Found!', "\n\n";
 				last;
+			}else{
+				print "\n";
 			}
 		}
 		last if $found;
@@ -92,7 +95,6 @@ sub readTxt
 	&abort("Can't find a \"${rname}\"-like file for reading.\n", 1) if $@;	# エラー時
 	my @txt = <$f>;		# 非エラー時
 	close $f;
-	print ' OK!', "\n\n";
 	map { $_=du($_) } @txt;
 	map { s/[\x0d\x0a]//g } @txt;	# 改行を削除
 	return @txt;
