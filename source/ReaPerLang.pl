@@ -1,5 +1,5 @@
 #!/usr/local/bin/perl
-my $ReaPerLang = 'ReaPerLang ver 1.10';
+my $ReaPerLang = 'ReaPerLang ver 1.11';
 
 # use strict  ;		# デバッグ用
 # use warnings;		# デバッグ用
