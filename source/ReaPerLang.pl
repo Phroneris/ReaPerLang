@@ -2,6 +2,12 @@
 
 my $ReaPerLang = 'ReaPerLang v1.12-dev';
 
+
+
+##### 初期設定
+
+### 基本
+
 use strict;    # デバッグ用
 use warnings;  # デバッグ用
 use autodie;      # エラー時に$@を得る
@@ -9,7 +15,7 @@ use Time::HiRes;  # 最後に出す経過時間のため
 
 
 
-##### 文字エンコーディング関連
+### 文字エンコーディング関連
 
 use utf8;  # このファイル内に直接書いたUTF-8文字列を全て内部文字列にする
 use open OUT => ':utf8';  # ファイル出力を全て '>:encoding(UTF-8)' で行う
@@ -21,7 +27,9 @@ use Encode::JP;        # for building exe
 use Encode::CN;        # 念のため
 use Encode::KR;        # 念のため
 use Encode::TW;        # 念のため
-binmode STDIN,  ":encoding(${enc_os})";  # 標準入出力で cp932(見た目)⇔UTF-8(内部) と変換する
+
+## 標準入出力で cp932(見た目)⇔UTF-8(内部) と変換する
+binmode STDIN,  ":encoding(${enc_os})";
 binmode STDOUT, ":encoding(${enc_os})";
 binmode STDERR, ":encoding(${enc_os})";
 
@@ -29,12 +37,14 @@ sub du ($) { decode('UTF-8', shift) };  # 内部文字列にする（文字コ�
 sub eu ($) { encode('UTF-8', shift) };  # UTF-8にする
 sub dc ($) { decode($enc_os, shift) };
 sub ec ($) { encode($enc_os, shift) };
-sub ed ($) { ec(du(shift)) };  # デバッグ時にpで文字列が化けたら"ec $var"または"ed $var"で戻せることが多い
+
+## デバッグ時にpで文字列が化けたら ec $var または ed $var で戻せることが多い
+sub ed ($) { ec(du(shift)) };
 # sub isN ($) { Encode::is_utf8(shift) ? 'naibu' : 'hadaka kamo...'; }
 
 
 
-##### 関数
+##### 汎用的なサブルーチンと変数
 
 my $indent = '';
 
@@ -43,7 +53,10 @@ sub abort
 {
   my $err = shift;
   my $noDecode = shift;
-  $err = dc($err) unless $noDecode;  # エラー文を自前で直接指定する場合、第2引数をtrueにしてデコードを避ける
+
+  ## エラー文を自前で直接指定する場合、第2引数をtrueにしてデコードを避ける
+  $err = dc($err) unless $noDecode;
+
   print $indent, '*ERROR*: ', $err, "\n", $indent, 'Press enter to abort.';
   <STDIN>;
   exit 1;
@@ -130,10 +143,10 @@ sub divDsc
 
 
 
-##### 標準入力
+##### 標準入出力で対話
 
 
-# モード選択
+### モード選択
 
 print $ReaPerLang, "\n";
 print <<'EOP';
@@ -173,7 +186,7 @@ else {
 }
 
 
-# ファイル指定
+### ファイル指定
 
 $indent = ' ';
 
@@ -213,7 +226,7 @@ my @tmpl_crr;
 @tmpl_crr = &readTxt(2);
 
 
-# missingファイルのセクション残留オプション
+### missingファイルのセクション残留オプション
 
 print ' [Option] Leave empty sections in the "missing" list?', "\n";
 print '  Yes=y, No=n/(blank): > ';
@@ -245,7 +258,7 @@ else {
 print "\n\n";
 
 
-# 確認
+### 確認
 
 my @modes = ('First-time', 'Repeater');
 my @yesNo = ('No', 'Yes');
@@ -277,10 +290,10 @@ print "\n";
 
 
 
-##### メイン
+##### メイン処理
 
 
-# 概要部の分離処理
+### 概要部の分離処理
 
 my @tmpl_dsc;
 @tmpl_dsc = &divDsc(1, @tmpl_crr);
@@ -303,7 +316,7 @@ elsif ($#lng_dsc < $#tmpl_dsc)
 }
 
 
-# 前処理と宣言
+### 前処理と宣言
 
 my $start_time = Time::HiRes::time;
 
@@ -311,12 +324,15 @@ my @lng_new = @tmpl_crr;
 my @lng_missing = ();
 my @section = grep { /^\[/ } @lng_old;
 my $endsec = '[endsec_RPL]';
-push @section, $endsec;
-map { $_ =~ /^(\[.+?\])(.*)$/; $_ = [$1, $2] } @section;  # $section[セクション名][その後のコメント]
 push @lng_new, ('', $endsec);
+push @section, $endsec;
+
+## $section[インデックス] = [セクション名, その後のコメント]
+map { $_ =~ /^(\[.+?\])(.*)$/; $_ = [$1, $2] } @section;
+
 
 my $Lol = 0;       # @lng_oldの行数
-my $s = -1;        # @sectionの要素数
+my $s = -1;        # @sectionのインデックス
 my $is_s1st = 1;   # 見つからなかった行がそのセクションで初めてのそれかどうか
 my $Lns_top = 0;   # @tmpl_crrの現在セクション頭の行数
 my $Lns_btm = -1;  # @tmpl_crrの次のセクション頭の行数
@@ -324,11 +340,13 @@ my $Lns_btm = -1;  # @tmpl_crrの次のセクション頭の行数
 sub insertSectionName
 {
   my $s = shift;
-  push @lng_missing, ('', $section[$s][0] . $section[$s][1]);  # "(改行) セクション名+コメント" の形で@lng_missing内に配置
+
+  ## "(改行) セクション名+コメント" の形で@lng_missing内に配置
+  push @lng_missing, ('', $section[$s][0] . $section[$s][1]);
 }
 
 
-# @lng_oldを頭から読んで各行処理
+### @lng_oldを頭から読んで各行処理
 
 my $p_int = 0;
 
@@ -441,7 +459,10 @@ foreach my $a (@lng_old)
       {
         my $str_sub = $tmpl_old[$Lol] =~ s/^;\^?//r;
         $a =~ s/^(?:;\/\^?)?//;
-        $yet_init = $oo_a if $oo_a;  # 接頭辞指定。意図的な無効化行ならそれを、そうでないならオプション行区別のために元のを。
+
+        ## 接頭辞指定。意図的な無効化行ならそれを、そうでないならオプション行区別のために元のを。
+        $yet_init = $oo_a if $oo_a;
+
         push @lng_missing, $yet_init . $str_sub, $yet_init . $a;
       }
       else {
@@ -464,7 +485,7 @@ print "\n\n", ' Writing...', "\n\n\n";
 
 
 
-##### 後処理と出力
+##### 後処理とファイル出力
 
 my $date = localtime;
 my @additionalInfo = (
