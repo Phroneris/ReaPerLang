@@ -53,7 +53,7 @@ sub readTxt
 {
 	my ($rname, $rfile, $f);
 	my @default = ('MyLangpack', '00', '01');
-	# my @default = ('JPN_Phroneris', '5982', '613');
+	# @default = ('JPN_Phroneris', '619', '683');
 	my $i = $_[0];
 	if ($devmode==1)
 	{
