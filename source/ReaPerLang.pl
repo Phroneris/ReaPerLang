@@ -1,8 +1,8 @@
 #!/usr/local/bin/perl
-my $ReaPerLang = 'ReaPerLang ver 1.11';
+my $ReaPerLang = 'ReaPerLang ver 1.12-dev';
 
-# use strict  ;		# デバッグ用
-# use warnings;		# デバッグ用
+use strict  ;		# デバッグ用
+use warnings;		# デバッグ用
 use autodie    ;	# エラー時に$@を得るため
 use Time::HiRes;	# 最後に経過時間を出すため
 
