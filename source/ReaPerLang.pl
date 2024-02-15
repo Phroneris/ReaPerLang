@@ -48,9 +48,49 @@ sub ed ($s) { ec(du($s)); }
 
 ##### 汎用的なサブルーチンと変数
 
-my $indent = '';
-my $finalMessage;  # ENDブロックで使用
+my ($indent, $indentUnit) = ('', 1);
 
+sub indentMore ()
+{
+  #### インデントを増やす
+  # :return (string) : 利用は想定していないが、増えた後の$indentが返る
+  $indent .= ' ' x $indentUnit;
+}
+
+sub indentLess ()
+{
+  #### インデントを減らす
+  # :return (string) : 利用は想定していないが、増えた後の$indentが返る
+  $indent = substr $indent, 0, -$indentUnit;
+}
+
+sub getIndentedTxt (@lines)
+{
+  #### 複数の文字列を結合してインデントする
+  # :param  array  @lines: 複数の文字列（空も可）
+  # :return string       : インデント済み文字列
+  my $txt = join '', @lines;
+  return $txt =~ s/^/$indent/gmr =~ s/^ +$//gmr;
+}
+
+sub prindent (@lines)
+{
+  #### インデント込みでprintする
+  # :param  array     @lines: printする複数の文字列（空も可）
+  # :return (boolean)       : 利用は想定していないが、printの成否に応じた真偽値が返る
+  print &getIndentedTxt(@lines);  # 出力先を変更したい場合はselectに頼ることになる
+}
+
+sub sayndent (@lines)
+{
+  #### インデント込みでsayする
+  # :param  array     @lines: sayする複数の文字列（空も可）
+  # :return (boolean)       : 利用は想定していないが、sayの成否に応じた真偽値が返る
+  say &getIndentedTxt(@lines);  # &prindent() ではなく一応本物のsayを使っておく
+}
+
+
+my $finalMessage;  # ENDブロックで使用
 
 sub abort ($err, $noDecode = 0)  # オプション引数にはデフォルト値を指定
 {
@@ -60,7 +100,7 @@ sub abort ($err, $noDecode = 0)  # オプション引数にはデフォルト値
   # :return void               : 異常終了（die）してENDブロックに飛ぶ
 
   $err = dc($err) unless $noDecode;
-  $finalMessage =  "${indent}Press enter to abort.\n";
+  $finalMessage = &getIndentedTxt("Press enter to abort.\n");
 
   ## $errの終端改行と最後の\nのどちらも無ければエラー発生箇所が表示されるが、
   ## どうせこのdieの書かれた行番号になるだけなのであまり意味は無い
@@ -87,7 +127,7 @@ sub readTxt ($i_rfile)
   if ($devmode == 1)
   {
     $rname = '';
-    print "\n";
+    &sayndent();
   }
   else {
     chomp($rname = <STDIN>);
@@ -107,6 +147,8 @@ sub readTxt ($i_rfile)
     @heads = ('', 'template_');
   }
 
+  &indentMore();
+
   foreach my $head (@heads)
   {
     my $found = 0;
@@ -115,7 +157,7 @@ sub readTxt ($i_rfile)
     {
       $rfile = "${head}${rname}${ext}";
       $rfiles[$i_rfile] = $rfile;
-      print ' Searching... ', $rfile;
+      &prindent('Searching... ', $rfile);
       if (-f $rfile)
       {
         $found = 1;
@@ -127,14 +169,20 @@ sub readTxt ($i_rfile)
       }
     }
 
-    last if $found;
-  }  # 無くてもとりあえずループからは抜ける
+    if ($found)
+    {
+      last;
+    }
+    else {
+      &abort("Can't find a \"${rname}\"-like file for reading.\n", 1);
+    }
+  }
+
+  &indentLess();
 
   eval { open $f, '<', ec($rfile); };
-  &abort("Can't find a \"${rname}\"-like file for reading.\n", 1)
-    if $@  # エラー時
-  ;
-  my @txt = <$f>;  # 非エラー時
+  &abort($@) if $@;  # エラー時
+  my @txt = <$f>;    # 非エラー時
   close $f;
 
   map { $_ = du($_); } @txt;
@@ -162,36 +210,38 @@ sub divDsc ($flg, @txt)
 
 ### モード選択
 
-print $ReaPerLang, "\n";
-print <<'EOP';
+&sayndent($ReaPerLang);
+&prindent(<<~ 'EOP');
 
 Mode select (0/1)
 || 0: First-time mode
 || 1: Repeater mode
 =======================
 EOP
-print ' > ';
+&indentMore();
+&prindent('> ');
 
 my $mode;
 chomp($mode = <STDIN>);
+&indentMore();
 
 if ($mode eq 0)  # 英字などの入力のためにeq
 {
-  print 'First-time mode. Welcome!';
+  &sayndent('First-time mode. Welcome!');
 }
 elsif ($mode eq 1)
 {
-  print 'Repeater mode. Welcome back!';
+  &sayndent('Repeater mode. Welcome back!');
 }
 elsif ($mode eq '0d')
 {
-  print 'Developer mode 0!';
+  &sayndent('Developer mode 0!');
   $devmode = 1;
   $mode = 0;
 }
 elsif ($mode eq '1d')
 {
-  print 'Developer mode 1!';
+  &sayndent('Developer mode 1!');
   $devmode = 1;
   $mode = 1;
 }
@@ -199,51 +249,62 @@ else {
   &abort("Invalid value.\n", 1);
 }
 
+&indentLess();
+&indentLess();
+
 
 ### ファイル指定
 
-$indent = ' ';
+&indentMore();
 
-print "\n\n\n";
-print ' Files in & out (All are UTF-8 text)', "\n";
-print ' || in : Your old LangPack file', "\n";
-print ' || in : Old REAPER template file the above LangPack has been adapted to', "\n" if $mode == 1;
-print ' || in : Current (the newest) REAPER template file', "\n";
-print ' || out: Your new LangPack file', "\n";
-print ' || out: List of "missing" (currently obsolete) translations', "\n";
-print ' || out: Current line-to-line REAPER template file', "\n";
-print ' ===================================================', "\n";
-print "\n";
-print ' Enter your old LangPack name (extension can be omitted):', "\n", '  > ';
+&sayndent();
+&sayndent();
+&sayndent('Files in & out (All are UTF-8 text)');
+&sayndent('|| in : Your old LangPack file');
+&sayndent('|| in : Old REAPER template file the above LangPack has been adapted to') if $mode == 1;
+&sayndent('|| in : Current (the newest) REAPER template file');
+&sayndent('|| out: Your new LangPack file');
+&sayndent('|| out: List of "missing" (currently obsolete) translations');
+&sayndent('|| out: Current line-to-line REAPER template file');
+&sayndent('===================================================');
+&sayndent();
+&sayndent('Enter your old LangPack name (extension can be omitted):');
+&indentMore();
+&prindent('> ');
 
 my @lng_old = &readTxt(0);
+&indentLess();
 my @lng_dsc = &divDsc(1, @lng_old);
 @lng_old = &divDsc(0, @lng_old);
 
 
-print ' Enter the version in ';
+&prindent('Enter the version in ');
 my @tmpl_old if $mode == 1;
 
 if ($mode == 1)
 {
   print 'each template name (the older and current)', "\n";
-  print '  The older: > ';
+  &indentMore();
+  &prindent('The older: > ');
   @tmpl_old = &divDsc(0, &readTxt(1));
-  print '  Current: > ';
+  &prindent('Current: > ');
 }
 else {
   print 'the current template name:', "\n";
-  print '  > ';
+  &indentMore();
+  &prindent('> ');
 }
 
 my @tmpl_crr;
 @tmpl_crr = &readTxt(2);
+&indentLess();
 
 
 ### missingファイルのセクション残留オプション
 
-print ' [Option] Leave empty sections in the "missing" list?', "\n";
-print '  Yes=y, No=n/(blank): > ';
+&sayndent('[Option] Leave empty sections in the "missing" list?');
+&indentMore();
+&prindent('Yes=y, No=n/(blank): > ');
 my $emp_section;
 
 if ($devmode == 1)
@@ -255,21 +316,27 @@ else {
   chomp($emp_section = <STDIN>);
 }
 
+&indentMore();
+
 if ($emp_section =~ /^y(?:es)?$/i)     # 大文字/小文字の差は無視
 {
   $emp_section = 1;
-  # print ' All-section mode!';
+  # &sayndent('All-section mode!');
 }
 elsif ($emp_section =~ /^(?:no?)?$/i)  # 無記入はNoとする
 {
   $emp_section = 0;
-  # print ' No-empty-section mode!';
+  # &sayndent('No-empty-section mode!');
 }
 else {
   &abort("Invalid value.\n", 1);
 }
 
-print "\n\n";
+&indentLess();
+&indentLess();
+
+&sayndent();
+&sayndent();
 
 
 ### 確認
@@ -288,23 +355,25 @@ my @outInfo = (
   "|| in : ${rfiles[2]}",  # 旧テンプレート
   "|| out: ${wfiles[0]}",  # 新言語パック
   "|| out: ${wfiles[1]}",  # missing
-  "|| out: ${wfiles[2]}",  # 新テンプレート
+  "|| out: ${wfiles[2]}",  # 行対行化した新テンプレート
   "|| Leave empty sections: ${yesNo[$emp_section]}",
   "============================================="
 );
 
-splice @outInfo, 2, 0, "|| in : ${rfiles[1]}" if $mode == 1;
-my @outConfirm = map { ' ' . $_ . "\n"; } @outInfo;
+splice @outInfo, 2, 0, "|| in : ${rfiles[1]}" if $mode == 1;  # 新テンプレート
 
-print ' * Process Confirmation *', "\n";
-print @outConfirm;
-print "\n", ' Press enter to continue.', "\n";
+&sayndent('* Process Confirmation *');
+&sayndent($_) foreach @outInfo;
+&sayndent();
+&sayndent('Press enter to continue.');
 <STDIN>;
-print "\n";
+&sayndent();
 
 
 
 ##### メイン処理
+
+&indentMore();
 
 
 ### 概要部の分離処理
@@ -364,7 +433,7 @@ sub insertSectionName ($s)
 
 my $p_int = 0;
 
-print ' Processing...', "\n";
+&sayndent('Processing...');
 $| = 1;  # オートフラッシュ（printを即出力する）
 
 foreach my $a (@lng_old)
@@ -376,16 +445,18 @@ foreach my $a (@lng_old)
   my $progress = $Lol * 100 / $#lng_old;  # 進行度（実数%）
   $p_int = int $progress * $len / 100;    # 進行度（切捨てバー長さ）
 
-  printf " %6.2f %% [", $progress;
+  ## ループの中なので一応速度を気にして、サブルーチンを使わずインデント
+  printf $indent . '%6.2f %% [', $progress;
+
   if ($progress == 0)
   {
-    printf "%s] %5d lines", ' ' x $len, $Lol;
+    printf '%s] %5d lines', ' ' x $len, $Lol;
   }
   elsif ($p_int != $p_prev)
   {
-    printf "%s%s] %5d lines", '/' x $p_int, ' ' x ($len - $p_int), $Lol;
+    printf '%s%s] %5d lines', '/' x $p_int, ' ' x ($len - $p_int), $Lol;
   }
-  print "\r";
+  print "\r";  # 行頭へ戻る
 
 
   my $Lnw = 0;  # @lng_newの行数
@@ -451,12 +522,6 @@ foreach my $a (@lng_old)
       {
         $lng_new[$Lnw] = $a;
         $hit = 1;
-        # eval { print "${Lol}: ${a}\n"; };
-        # if ($@)
-        # {
-          # print '*ERROR* :', dc($@);
-          # $DB::single = 1;
-        # }
       }
       $Lnw++;
     }
@@ -494,12 +559,21 @@ foreach my $a (@lng_old)
 
 $| = 0;
 
-my $time = sprintf("%.3f", Time::HiRes::time - $start_time);
-print "\n\n", ' Writing...', "\n\n\n";
+print "\n";  # 進捗バーの行末
+
+my $time = sprintf('%.3f', Time::HiRes::time - $start_time);
+
+&sayndent();
+&sayndent('Process done!');
+&sayndent('(Time: ', $time, ' sec)');
+&sayndent();
+&sayndent();
 
 
 
 ##### 後処理とファイル出力
+
+&indentMore();
 
 my $date = localtime;
 my @additionalInfo = (
@@ -515,6 +589,9 @@ splice @lng_new, -2;
 unshift @lng_new, @lng_dsc;
 unshift @tmpl_crr, @tmpl_dsc;
 
+
+&sayndent('Writing...');
+&sayndent();
 
 sub writeTxt ($i_wfile, @txt)
 {
@@ -536,7 +613,7 @@ sub writeTxt ($i_wfile, @txt)
   print $f @txt;     # 非エラー時
   close $f;
 
-  print ' Completed writing "', $wfile, '": about ', $#txt, " lines.\n";
+  &sayndent('Completed writing "', $wfile, '": about ', $#txt, ' lines.');
 }
 
 &writeTxt(0, @lng_new);
@@ -544,8 +621,11 @@ sub writeTxt ($i_wfile, @txt)
 &writeTxt(2, @tmpl_crr);
 # &writeTxt(3, @section);
 
-print ' (Time: ', "$time", ' sec)', "\n\n";
-$finalMessage = " Press enter to exit.\n";
+&sayndent();
+&sayndent();
+
+$indent = '';
+$finalMessage = &getIndentedTxt("All done!\nPress enter to exit.\n");
 
 
 ## 異常終了でも正常終了でも必ずここに飛ぶ。ただし正常なら $? == 0
