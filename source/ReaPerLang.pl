@@ -9,8 +9,8 @@ my $ReaPerLang = 'ReaPerLang v1.12-dev';
 ### 基本
 
 use v5.36.1;
-use strict;    # デバッグ用
-use warnings;  # デバッグ用
+# no strict;    # リリース用
+# no warnings;  # リリース用
 
 use autodie;      # エラー時に$@を得る
 use Time::HiRes;  # 最後に出す経過時間のため
