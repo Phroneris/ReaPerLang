@@ -8,8 +8,10 @@ my $ReaPerLang = 'ReaPerLang v1.12-dev';
 
 ### 基本
 
+use v5.36.1;
 use strict;    # デバッグ用
 use warnings;  # デバッグ用
+
 use autodie;      # エラー時に$@を得る
 use Time::HiRes;  # 最後に出す経過時間のため
 
@@ -33,14 +35,14 @@ binmode STDIN,  ":encoding(${enc_os})";
 binmode STDOUT, ":encoding(${enc_os})";
 binmode STDERR, ":encoding(${enc_os})";
 
-sub du ($) { decode('UTF-8', shift); }  # 内部文字列にする（文字コードを取り除く）
-sub eu ($) { encode('UTF-8', shift); }  # UTF-8にする
-sub dc ($) { decode($enc_os, shift); }
-sub ec ($) { encode($enc_os, shift); }
+sub du ($s) { decode('UTF-8', $s); }  # 内部文字列にする（文字コードを取り除く）
+sub eu ($s) { encode('UTF-8', $s); }  # UTF-8にする
+sub dc ($s) { decode($enc_os, $s); }
+sub ec ($s) { encode($enc_os, $s); }
 
 ## デバッグ時にpで文字列が化けたら ec $var または ed $var で戻せることが多い
-sub ed ($) { ec(du(shift)); }
-# sub isN ($) { Encode::is_utf8(shift) ? 'naibu' : 'hadaka kamo...'; }
+sub ed ($s) { ec(du($s)); }
+# sub isN ($s) { Encode::is_utf8($s) ? 'naibu' : 'hadaka kamo...'; }
 
 
 
@@ -49,14 +51,14 @@ sub ed ($) { ec(du(shift)); }
 my $indent = '';
 
 
-sub abort
+sub abort ($err, $noDecode = 0)  # オプション引数にはデフォルト値を指定
 {
-  my $err = shift;
-  my $noDecode = shift;
+  #### 任意のエラー文を出力して異常終了する
+  # :param  string/$@ $err     : エラー文
+  # :param? boolean   $noDecode: エラー文を文字列で指定する場合、真にしてデコードを避ける
+  # :return void               : ステータス1として異常終了する
 
-  ## エラー文を自前で直接指定する場合、第2引数をtrueにしてデコードを避ける
   $err = dc($err) unless $noDecode;
-
   print $indent, '*ERROR*: ', $err, "\n", $indent, 'Press enter to abort.';
   <STDIN>;
   exit 1;
@@ -67,12 +69,17 @@ my $devmode = 0;
 my $pname;
 my @rfiles = ();
 
-sub readTxt
+sub readTxt ($i_rfile)
 {
+  #### 所定のファイルを探し、ファイル名を@rfilesに保持し、中身のテキストを読み込む
+  # :param  integer $i_rfile: 0: 自分の旧言語パック
+  #                           1: 旧テンプレート
+  #                           2: 最新テンプレート
+  # :return array           : ファイルの各行の文字列リスト
+
   my ($rname, $rfile, $f);
   my @default = ('MyLangpack', '00', '01');
   # @default = ('JPN_Phroneris', '619', '683');
-  my $i = $_[0];
 
   if ($devmode == 1)
   {
@@ -83,16 +90,16 @@ sub readTxt
     chomp($rname = <STDIN>);
   }
 
-  $rname = $rname eq '' ? $default[$i] : $rname;
+  $rname = $rname eq '' ? $default[$i_rfile] : $rname;
 
   my @heads;
 
-  if ($i == 0)  # 自分の旧LangPackを読む場合
+  if ($i_rfile == 0)  # 自分の旧LangPackを読む場合
   {
     $pname = $rname =~ s/(\.ReaperLangPack)?(\.txt)?$//inr;
     @heads = ('');
   }
-  else {        # テンプレートを読み込む場合
+  else {              # テンプレートを読み込む場合
     $rname = "reaper${rname}";
     @heads = ('', 'template_');
   }
@@ -104,7 +111,7 @@ sub readTxt
     foreach my $ext ('.ReaperLangPack', '.txt', '.ReaperLangPack.txt', '')
     {
       $rfile = "${head}${rname}${ext}";
-      $rfiles[$i] = $rfile;
+      $rfiles[$i_rfile] = $rfile;
       print ' Searching... ', $rfile;
       if (-f $rfile)
       {
@@ -135,10 +142,14 @@ sub readTxt
 }
 
 
-sub divDsc
+sub divDsc ($flg, @txt)
 {
-  my $flg = shift;  # 0なら文書冒頭の概要部以外を、1なら概要部だけを返す
-  return grep { $flg = /^\[common\]/ ? !$flg : $flg; } @_;
+  #### 言語パック冒頭の概要部とそれ以外とを切り離す
+  # :param  boolean $flg: true : 概要部以外を返す
+  #                       false: 概要部だけを返す
+  # :param  array   @txt: 概要部を含む言語パック文書の文字列配列
+  # :return array       : $flgの指定に応じて切り離された方の文字列配列
+  return grep { $flg = /^\[common\]/ ? !$flg : $flg; } @txt;
 }
 
 
@@ -337,11 +348,11 @@ my $is_s1st = 1;   # 見つからなかった行がそのセクションで初�
 my $Lns_top = 0;   # @tmpl_crrの現在セクション頭の行数
 my $Lns_btm = -1;  # @tmpl_crrの次のセクション頭の行数
 
-sub insertSectionName
+sub insertSectionName ($s)
 {
-  my $s = shift;
-
-  ## "(改行) セクション名+コメント" の形で@lng_missing内に配置
+  #### セクション名を@lng_missingに "(改行) セクション名+コメント" の形で配置
+  # :param  integer   $s: @sectionのインデックス
+  # :return (integer)   : 利用は想定していないが、push後の配列の要素数が返る
   push @lng_missing, ('', $section[$s][0] . $section[$s][1]);
 }
 
@@ -502,10 +513,17 @@ unshift @lng_new, @lng_dsc;
 unshift @tmpl_crr, @tmpl_dsc;
 
 
-sub writeTxt
+sub writeTxt ($i_wfile, @txt)
 {
-  my $wfile = $wfiles[shift];
-  my @txt = @_;
+  #### @wfilesのファイル名でテキストファイルを書き出す
+  # :param  integer   $i_wfile: 0: 新言語パック
+  #                             1: missing
+  #                             2: 新テンプレート（行対行化したもの）
+  #                             3: 旧言語パックからセクション名の行だけ抽出したもの
+  # :param  array     @txt    : ファイルの各行の文字列リスト
+  # :return (boolean)         : 利用は想定していないが、printの成否に応じた真偽値が返る
+
+  my $wfile = $wfiles[$i_wfile];
   my $f;
 
   map { $_ = $_ . "\n"; } @txt;
