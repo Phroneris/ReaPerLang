@@ -163,9 +163,9 @@ print $ReaPerLang, "\n";
 print <<'EOP';
 
 Mode select (0/1)
-┃0: First-time mode
-┃1: Repeater mode
-┗━━━━━━━━━━
+|| 0: First-time mode
+|| 1: Repeater mode
+=======================
 EOP
 print ' > ';
 
@@ -203,13 +203,13 @@ $indent = ' ';
 
 print "\n\n\n";
 print ' Files in & out (All are UTF-8 text)', "\n";
-print ' ┃in : Your old LangPack file', "\n";
-print ' ┃in : Old REAPER template file the above LangPack has been adapted to', "\n" if $mode == 1;
-print ' ┃in : Current (the newest) REAPER template file', "\n";
-print ' ┃out: Your new LangPack file', "\n";
-print ' ┃out: List of "missing" (currently obsolete) translations', "\n";
-print ' ┃out: Current line-to-line REAPER template file', "\n";
-print ' ┗━━━━━━━━━━━━━━━━━━━━━━━━', "\n";
+print ' || in : Your old LangPack file', "\n";
+print ' || in : Old REAPER template file the above LangPack has been adapted to', "\n" if $mode == 1;
+print ' || in : Current (the newest) REAPER template file', "\n";
+print ' || out: Your new LangPack file', "\n";
+print ' || out: List of "missing" (currently obsolete) translations', "\n";
+print ' || out: Current line-to-line REAPER template file', "\n";
+print ' ===================================================', "\n";
 print "\n";
 print ' Enter your old LangPack name (extension can be omitted):', "\n", '  > ';
 
@@ -280,17 +280,17 @@ my @wfiles = (
   "_${mode}_${pname}_section.txt"
 );
 my @outInfo = (
-  "┃${modes[$mode]} Mode",
-  "┃in : ${rfiles[0]}",  # 旧言語パック
-  "┃in : ${rfiles[2]}",  # 旧テンプレート
-  "┃out: ${wfiles[0]}",  # 新言語パック
-  "┃out: ${wfiles[1]}",  # missing
-  "┃out: ${wfiles[2]}",  # 新テンプレート
-  "┃Leave empty sections: ${yesNo[$emp_section]}",
-  "┗━━━━━━━━━━━━━━━━━━━━━"
+  "|| ${modes[$mode]} Mode",
+  "|| in : ${rfiles[0]}",  # 旧言語パック
+  "|| in : ${rfiles[2]}",  # 旧テンプレート
+  "|| out: ${wfiles[0]}",  # 新言語パック
+  "|| out: ${wfiles[1]}",  # missing
+  "|| out: ${wfiles[2]}",  # 新テンプレート
+  "|| Leave empty sections: ${yesNo[$emp_section]}",
+  "============================================="
 );
 
-splice @outInfo, 2, 0, "┃in : ${rfiles[1]}" if $mode == 1;
+splice @outInfo, 2, 0, "|| in : ${rfiles[1]}" if $mode == 1;
 my @outConfirm = map { ' ' . $_ . "\n"; } @outInfo;
 
 print ' * Process Confirmation *', "\n";
@@ -500,8 +500,8 @@ print "\n\n", ' Writing...', "\n\n\n";
 
 my $date = localtime;
 my @additionalInfo = (
-  "┃Date: ${date} (local)",
-  "┃Time: ${time} sec"
+  "|| Date: ${date} (local)",
+  "|| Time: ${time} sec"
 );
 
 splice @outInfo, -1, 0, @additionalInfo;
