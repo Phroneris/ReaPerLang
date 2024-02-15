@@ -1,4 +1,4 @@
-#!/usr/local/bin/perl
+#!/usr/bin/env perl
 my $ReaPerLang = 'ReaPerLang v1.12-dev';
 
 use strict  ;		# デバッグ用
