@@ -442,8 +442,8 @@ foreach my $a (@lng_old)
 
   my $p_prev = $p_int;
   my $len = 50;
-  my $progress = $Lol * 100 / $#lng_old;  # 進行度（実数%）
-  $p_int = int $progress * $len / 100;    # 進行度（切捨てバー長さ）
+  my $progress = $Lol * 100 / $#lng_old;  # 進捗度（実数%）
+  $p_int = int $progress * $len / 100;    # 進捗度（切捨てバー長さ）
 
   ## ループの中なので一応速度を気にして、サブルーチンを使わずインデント
   printf $indent . '%6.2f %% [', $progress;
@@ -475,7 +475,7 @@ foreach my $a (@lng_old)
     {
       if ($lng_new[$Lnw] =~ /^\Q$section[$s][0]/)
       {
-        $lng_new[$Lnw] = $a;  # @lng_new（≒@tmpl_crr）にセクション名を記載（セクションコメント込み）
+        $lng_new[$Lnw] = $a;  # @lng_new（≒@tmpl_crr）にセクション名を記載（コメント込み）
         $Lns_top = $Lnw;      # @lng_newを読む時の範囲を同名セクション内のみに抑制（上限）
         $hit = -1;
       }
@@ -492,15 +492,18 @@ foreach my $a (@lng_old)
   elsif ($a =~ /^5CA1E00000000000=/)  # スケール情報の行ならば
   {
 
-    splice @lng_new, $Lns_btm, 0, $a;  # @lng_newの同一セクションの末尾にスケール情報を追加
     my $scaled = '5CA1E...........=*scaled*';
-    splice @tmpl_crr, $Lns_btm, 0, $scaled;            # その分、@tmpl_crrの行数を@lng_newに合わせる
-    splice @tmpl_old, $Lol, 0, $scaled if $mode == 1;  # 同様に、@tmpl_oldの行数を@lng_oldに合わせる
+    splice @lng_new, $Lns_btm, 0, $a;  # @lng_newの同一セクションの末尾にスケール情報を追加
+    splice @tmpl_crr, $Lns_btm, 0, $scaled;  # その分、@tmpl_crrの行数を@lng_newに合わせる
+    splice @tmpl_old, $Lol, 0, $scaled       # 同様に、@tmpl_oldの行数を@lng_oldに合わせる
+      if $mode == 1
+    ;
 
     $Lns_btm++;
 
   }
-  elsif ($a =~ /^((?:;\/\^?)?)(\w{16})=(.*)/)  # スケール情報ではない、翻訳済み行または意図的な無効化行ならば
+  ## スケール情報ではない、翻訳済み行または意図的な無効化行ならば
+  elsif ($a =~ /^((?:;\/\^?)?)(\w{16})=(.*)/)
   {
 
     my $oo_a = $1;  # ;/ または ;/^ の意図的な無効化行（opt-out、「（森）」の独自記法）
@@ -516,9 +519,11 @@ foreach my $a (@lng_old)
     $Lnw = $Lns_top;
     $hit = 0;
 
-    while ($hit == 0 and $Lnw <= $Lns_btm)  # @lng_newを頭から（または属するセクション内のみ）読む
+    ## @lng_newを頭から（または属するセクション内のみ）読む
+    while ($hit == 0 and $Lnw <= $Lns_btm)
     {
-      if ($lng_new[$Lnw] =~ /^\Q${yet_init}\E${code_a}=/)  # 未翻訳接頭辞付きのコード一致行ならば
+      ## 未翻訳接頭辞付きのコード一致行ならば
+      if ($lng_new[$Lnw] =~ /^\Q${yet_init}\E${code_a}=/)
       {
         $lng_new[$Lnw] = $a;
         $hit = 1;
@@ -539,7 +544,8 @@ foreach my $a (@lng_old)
         my $str_sub = $tmpl_old[$Lol] =~ s/^;\^?//r;
         $a =~ s/^(?:;\/\^?)?//;
 
-        ## 接頭辞指定。意図的な無効化行ならそれを、そうでないならオプション行区別のために元のを。
+        ## 接頭辞指定
+        ## 意図的な無効化行ならそれを、そうでないならオプション行区別のために元のを
         $yet_init = $oo_a if $oo_a;
 
         push @lng_missing, $yet_init . $str_sub, $yet_init . $a;
@@ -590,7 +596,7 @@ unshift @lng_new, @lng_dsc;
 unshift @tmpl_crr, @tmpl_dsc;
 
 
-&sayndent('Writing...');
+&sayndent('Writing files...');
 &sayndent();
 
 sub writeTxt ($i_wfile, @txt)
@@ -613,7 +619,7 @@ sub writeTxt ($i_wfile, @txt)
   print $f @txt;     # 非エラー時
   close $f;
 
-  &sayndent('Completed writing "', $wfile, '": about ', $#txt, ' lines.');
+  &sayndent('Completed writing "', $wfile, '" about ', $#txt, ' lines!');
 }
 
 &writeTxt(0, @lng_new);
@@ -625,7 +631,7 @@ sub writeTxt ($i_wfile, @txt)
 &sayndent();
 
 $indent = '';
-$finalMessage = &getIndentedTxt("All done!\nPress enter to exit.\n");
+$finalMessage = &getIndentedTxt("All done!!\nPress enter to exit.\n");
 
 
 ## 異常終了でも正常終了でも必ずここに飛ぶ。ただし正常なら $? == 0
