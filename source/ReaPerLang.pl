@@ -49,6 +49,7 @@ sub ed ($s) { ec(du($s)); }
 ##### 汎用的なサブルーチンと変数
 
 my $indent = '';
+my $finalMessage;  # ENDブロックで使用
 
 
 sub abort ($err, $noDecode = 0)  # オプション引数にはデフォルト値を指定
@@ -56,12 +57,14 @@ sub abort ($err, $noDecode = 0)  # オプション引数にはデフォルト値
   #### 任意のエラー文を出力して異常終了する
   # :param  string/$@ $err     : エラー文
   # :param? boolean   $noDecode: エラー文を文字列で指定する場合、真にしてデコードを避ける
-  # :return void               : ステータス1として異常終了する
+  # :return void               : 異常終了（die）してENDブロックに飛ぶ
 
   $err = dc($err) unless $noDecode;
-  print $indent, '*ERROR*: ', $err, "\n", $indent, 'Press enter to abort.';
-  <STDIN>;
-  exit 1;
+  $finalMessage =  "${indent}Press enter to abort.\n";
+
+  ## $errの終端改行と最後の\nのどちらも無ければエラー発生箇所が表示されるが、
+  ## どうせこのdieの書かれた行番号になるだけなのであまり意味は無い
+  die $indent, '*ERROR*: ', $err, "\n";
 }
 
 
@@ -541,6 +544,12 @@ sub writeTxt ($i_wfile, @txt)
 &writeTxt(2, @tmpl_crr);
 # &writeTxt(3, @section);
 
-print ' (Time: ', "$time", ' sec)', "\n";
-print "\n", ' Press enter to exit.', "\n";
-<STDIN>;
+print ' (Time: ', "$time", ' sec)', "\n\n";
+$finalMessage = " Press enter to exit.\n";
+
+
+## 異常終了でも正常終了でも必ずここに飛ぶ。ただし正常なら $? == 0
+END {
+  print { $? > 0 ? *STDERR : *STDOUT; } $finalMessage;
+  <STDIN>;
+}
