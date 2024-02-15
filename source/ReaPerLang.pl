@@ -65,7 +65,8 @@ sub readTxt
   {
     $rname = '';
     print "\n";
-  } else {
+  }
+  else {
     chomp($rname = <STDIN>);
   }
 
@@ -77,7 +78,8 @@ sub readTxt
   {
     $pname = $rname =~ s/(\.ReaperLangPack)?(\.txt)?$//inr;
     @heads = ('');
-  } else {      # テンプレートを読み込む場合
+  }
+  else {        # テンプレートを読み込む場合
     $rname = "reaper${rname}";
     @heads = ('', 'template_');
   }
@@ -96,7 +98,8 @@ sub readTxt
         $found = 1;
         print '  <- Found!', "\n\n";
         last;
-      } else {
+      }
+      else {
         print "\n";
       }
     }
@@ -164,7 +167,8 @@ elsif ($mode eq '1d')
   print 'Developer mode 1!';
   $devmode = 1;
   $mode = 1;
-} else {
+}
+else {
   &abort("Invalid value.\n", 1);
 }
 
@@ -199,7 +203,8 @@ if ($mode == 1)
   print '  The older: > ';
   @tmpl_old = &divDsc(0, &readTxt(1));
   print '  Current: > ';
-} else {
+}
+else {
   print 'the current template name:', "\n";
   print '  > ';
 }
@@ -218,7 +223,8 @@ if ($devmode == 1)
 {
   $emp_section = '';
   print "\n";
-} else {
+}
+else {
   chomp($emp_section = <STDIN>);
 }
 
@@ -231,7 +237,8 @@ elsif ($emp_section =~ /^(?:no?)?$/i)  # 無記入はNoとする
 {
   $emp_section = 0;
   # print ' No-empty-section mode!';
-} else {
+}
+else {
   &abort("Invalid value.\n", 1);
 }
 
@@ -436,7 +443,8 @@ foreach my $a (@lng_old)
         $a =~ s/^(?:;\/\^?)?//;
         $yet_init = $oo_a if $oo_a;  # 接頭辞指定。意図的な無効化行ならそれを、そうでないならオプション行区別のために元のを。
         push @lng_missing, $yet_init . $str_sub, $yet_init . $a;
-      } else {
+      }
+      else {
         push @lng_missing, $a;
       }
     }
